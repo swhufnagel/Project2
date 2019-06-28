@@ -4,6 +4,7 @@ var $lastName = $("#lastName");
 var $userName = $("#userName");
 var $email = $("#email");
 var $password = $("#password");
+var $passwordRepeat = $("#password-repeat");
 var $submitBtn = $("#submit");
 
 // The API object contains methods for each kind of request we'll make
@@ -68,6 +69,7 @@ var handleFormSubmit = function(event) {
   $userName.val("");
   $email.val("");
   $password.val("");
+  $passwordRepeat.val("");
 };
 
 // Add event listeners to the submit and delete buttons
