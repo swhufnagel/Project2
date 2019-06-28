@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/styles.css">
+  <title>Register</title>
+</head>
+<body>
+
+
+
+<div id="register">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 offset-2">
+          <!-- {{!-- <h1>{{msg}}</h1> --}} -->
+          <h2>Create an Account</h2>
+          <form class="clearfix mb-4" action="POST">
+              <!-- {{!-- First Name --}} -->
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" class="form-control" aria-describedby="firstName" placeholder="John">
+            </div>
+            <!-- {{!-- Last Name --}} -->
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" class="form-control" aria-describedby="lastName" placeholder="Doe"></input>
+            </div>
+            <!-- {{!-- Username --}} -->
+            <div class="form-group">
+              <label for="userName">Username:</label>
+              <input type="text" id="userName" class="form-control" aria-describedby="userName" placeholder="Doeboy86"></input>
+            </div>
+            <!-- {{!-- Email --}} -->
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" id="email" class="form-control" aria-describedby="email" placeholder="jdoe@example.com"></input>
+            </div>
+            <!-- {{!-- Password --}} -->
+            <div class="form-group">
+              <label for="psw">Password:</label>
+              <input type="password" id="psw" class="form-control" aria-describedby="psw" placeholder=""></input>
+            </div>
+            <!-- {{!-- Password Repeat --}} -->
+            <div class="form-group">
+              <label for="psw-repeat">Repeat Password:</label>
+              <input type="password" id="psw-repeat" class="form-control" aria-describedby="psw-repeat" placeholder=""></input>
+            </div>
+            <!-- {{!-- Submit Button --}} -->
+            <button id="submit" class="btn btn-primary float-right">Submit</button>
+          </form>
+  
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- {{!-- jQuery CDN --}} -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- {{!-- index.js (or does it need its own register.js) --}} -->
+  <script src="../public/js/register.js"></script>
+
+
+</body>
+</html>
