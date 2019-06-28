@@ -1,11 +1,13 @@
 // Get references to page elements
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
-var $userName = $("#userName");
+var $regUserName = $("#regUserName");
 var $email = $("#email");
-var $password = $("#password");
-var $passwordRepeat = $("#password-repeat");
-var $submitBtn = $("#submit");
+var $regPassword = $("#regPassword");
+var $passwordRepeat = $("#regPassword-repeat");
+// eslint-disable-next-line no-unused-vars
+var $loginSubmitBtn = $("#loginSubmit");
+var $regSubmitBtn = $("#registerSubmit");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -35,15 +37,15 @@ var API = {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var registerFormSubmit = function(event) {
   event.preventDefault();
 
   var account = {
     firstName: $firstName.val().trim(),
     lastName: $lastName.val().trim(),
-    userName: $userName.val().trim(),
+    userName: $regUserName.val().trim(),
     email: $email.val().trim(),
-    password: $password.val().trim()
+    password: $regPassword.val().trim()
   };
 
   if (
@@ -66,11 +68,14 @@ var handleFormSubmit = function(event) {
 
   $firstName.val("");
   $lastName.val("");
-  $userName.val("");
+  $regUserName.val("");
   $email.val("");
-  $password.val("");
+  $regPassword.val("");
   $passwordRepeat.val("");
 };
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+// Add Event Listener to Create an Account
+$regSubmitBtn.on("click", registerFormSubmit);
+
+// Add Event Listener to Login
+// $loginSubmitBtn.on("click", );
