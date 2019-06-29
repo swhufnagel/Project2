@@ -1,3 +1,5 @@
+var users = require("./userLogin.js");
+var comments = require("./comments.js");
 module.exports = function(sequelize, DataTypes) {
   var postTable = sequelize.define("postTable", {
     postId: {
@@ -15,8 +17,13 @@ module.exports = function(sequelize, DataTypes) {
     image: {
       type: DataTypes.BLOB,
       allowNull: true
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   });
+  //postTable.hasMany(comments);
 
   // postTable.associate = function(models) {
   //   postTable.belongsTo(models.userId, {

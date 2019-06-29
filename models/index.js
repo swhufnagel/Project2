@@ -7,6 +7,7 @@ var Sequelize = require("sequelize");
 var basename = path.basename(module.filename);
 var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
+
 var db = {};
 var sequelize;
 
@@ -37,6 +38,13 @@ Object.keys(db).forEach(function(modelName) {
     db[modelName].associate(db);
   }
 });
+
+//Associations for table, they should all be linked now!
+db.comments.belongsTo(db.userLogin);
+db.postTable.hasMany(db.comments);
+db.postTable.belongsTo(db.userLogin);
+db.userLogin.hasMany(db.postTable);
+db.comments.belongsTo(db.postTable);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

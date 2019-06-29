@@ -1,5 +1,5 @@
 userId,firstName,lastName,userName,email,password,createdAt,updatedAt
-1,Devin,McCourty,Goobastank,abc@123.com,password,"2019-06-28 19:10:40","2019-06-28 19:10:40"
+1,Devin,McCourty,Goobastank,abc@123.com,password,"1970-01-01 19:10:40","2019-06-28 19:10:40"
 2,Sean,Connery,SeanWithTheWind,abc@123.com,password,"2019-06-28 19:14:02","2019-06-28 19:14:02"
 3,Rich,"e' Rich",Noobesi,abc@123.com,abc@123.com,"2019-06-28 19:15:30","2019-06-28 19:15:30"
 4,Sam,"-wise Gamgee",Xoelos,abc@123.com,password,"2019-06-28 19:16:24","2019-06-28 19:16:24"
