@@ -1,10 +1,11 @@
+
 module.exports = function(sequelize, DataTypes) {
   var userLogin = sequelize.define("userLogin", {
-    userId: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
+    // userId: {
+    //   type: DataTypes.INTEGER,
+    //   autoIncrement: true,
+    //   primaryKey: true
+    // },
     firstName: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -35,11 +36,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [8, 20]
-      }
+      allowNull: false
     }
   });
+
+  //userLogin.hasMany(posts);
+  //userLogin.hasMany();
   return userLogin;
 };
