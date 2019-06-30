@@ -1,64 +1,77 @@
 <template>
   <v-content>
-    <h1>Register</h1>
-    <form action="POST">
-      <v-text-field
-        v-model="firstName"
-        :counter="20"
-        label="First Name"
-        id="firstName"
-        required
-        @input="$v.firstName.$touch()"
-        @blur="$v.firstName.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="lastName"
-        :counter="20"
-        label="Last Name"
-        id="lastName"
-        required
-        @input="$v.lastName.$touch()"
-        @blur="$v.lastName.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="userName"
-        :counter="25"
-        label="User Name"
-        id="userName"
-        required
-        @input="$v.userName.$touch()"
-        @blur="$v.userName.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        label="E-mail"
-        id="email"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        label="Password"
-        type="password"
-        id="password"
-        required
-        @input="$v.password.$touch()"
-        @blur="$v.password.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="passwordRepeat"
-        label="Confirm Password"
-        id="password-repeat"
-        type="password"
-        required
-        @input="$v.passwordRepeat.$touch()"
-        @blur="$v.passwordRepeat.$touch()"
-      ></v-text-field>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md6>
+          <v-card class="elevation-12">
+            <v-toolbar dark color="purple darken-3">
+              <v-toolbar-title>Register</v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+            <v-card-text>
+              <form action="POST">
+                <v-text-field
+                  v-model="firstName"
+                  :counter="20"
+                  label="First Name"
+                  id="firstName"
+                  required
+                  @input="$v.firstName.$touch()"
+                  @blur="$v.firstName.$touch()"
+                ></v-text-field>
+                <v-text-field
+                  v-model="lastName"
+                  :counter="20"
+                  label="Last Name"
+                  id="lastName"
+                  required
+                  @input="$v.lastName.$touch()"
+                  @blur="$v.lastName.$touch()"
+                ></v-text-field>
+                <v-text-field
+                  v-model="userName"
+                  :counter="25"
+                  label="User Name"
+                  id="userName"
+                  required
+                  @input="$v.userName.$touch()"
+                  @blur="$v.userName.$touch()"
+                ></v-text-field>
+                <v-text-field
+                  v-model="email"
+                  label="E-mail"
+                  id="email"
+                  required
+                  @input="$v.email.$touch()"
+                  @blur="$v.email.$touch()"
+                ></v-text-field>
+                <v-text-field
+                  v-model="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  required
+                  @input="$v.password.$touch()"
+                  @blur="$v.password.$touch()"
+                ></v-text-field>
+                <v-text-field
+                  v-model="passwordRepeat"
+                  label="Confirm Password"
+                  id="password-repeat"
+                  type="password"
+                  required
+                  @input="$v.passwordRepeat.$touch()"
+                  @blur="$v.passwordRepeat.$touch()"
+                ></v-text-field>
 
-      <v-btn id="submit" @click="submit">submit</v-btn>
-      <v-btn @click="clear">clear</v-btn>
-    </form>
+                <v-btn dark color="purple darken-3" id="submit" @click="submit">submit</v-btn>
+                <v-btn dark color="purple darken-3" @click="clear">clear</v-btn>
+              </form>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-content>
 </template>
 

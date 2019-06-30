@@ -8,12 +8,6 @@
             <v-toolbar dark color="purple darken-3">
               <v-toolbar-title>Login form</v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-tooltip bottom>
-                <v-btn icon large :href="source" target="_blank" slot="activator">
-                  <v-icon large>code</v-icon>
-                </v-btn>
-                <span>Source</span>
-              </v-tooltip>
             </v-toolbar>
             <v-card-text>
               <v-form>
