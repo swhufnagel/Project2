@@ -1,23 +1,28 @@
 <template>
-  <v-toolbar color="purple">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>Postivism</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>Link One</v-btn>
-      <v-btn flat>Link Two</v-btn>
-      <v-btn flat>Link Three</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
-  <!-- <v-toolbar dark color="primary">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title class="white--text">Title</v-toolbar-title>
+  <v-toolbar color="purple darken-3" dark app :clipped-left="$vuetify.breakpoint.mdAndUp" fixed>
+    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <span class="hidden-sm-and-down">Google Contacts</span>
+    </v-toolbar-title>
+    <v-text-field
+      flat
+      solo-inverted
+      prepend-icon="search"
+      label="Search"
+      class="hidden-sm-and-down"
+    ></v-text-field>
     <v-spacer></v-spacer>
     <v-btn icon>
-      <v-icon>more_vert</v-icon>
+      <v-icon>apps</v-icon>
     </v-btn>
-  </v-toolbar> -->
+    <v-btn icon>
+      <v-icon>notifications</v-icon>
+    </v-btn>
+  </v-toolbar>
 </template>
+
+<script>
+</script>
 
 
 
