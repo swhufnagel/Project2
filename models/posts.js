@@ -18,20 +18,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BLOB,
       allowNull: true
     },
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: "0"
+    },
+    dislikes: {
+      type: DataTypes.INTEGER,
+      defaultValue: "0"
+    },
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
     }
   });
-  //postTable.hasMany(comments);
-
-  // postTable.associate = function(models) {
-  //   postTable.belongsTo(models.userId, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
 
   return postTable;
 };
