@@ -23,15 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   });
-  //postTable.hasMany(comments);
 
-  // postTable.associate = function(models) {
-  //   postTable.belongsTo(models.userId, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
 
   return postTable;
 };

@@ -1,10 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var comments = sequelize.define("comments", {
-    // commentId: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: true,
-    //   primaryKey: true
-    // },
+    commentId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     text: {
       type: DataTypes.STRING,
       allowNull: true,
