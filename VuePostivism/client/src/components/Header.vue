@@ -23,7 +23,7 @@
                 <v-list-tile-title>{{ item.text }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile v-for="(child, i) in item.children" :key="i" @click="nothing">
+            <v-list-tile v-for="(child, i) in item.children" :key="i" @click="nothing()">
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-tile-action>
@@ -32,7 +32,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else @click="nothing" :key="item.text">
+          <v-list-tile v-else @click="nothing()" :key="item.text">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -117,6 +117,11 @@
 <script>
 export default {
   data: () => ({
+    methods: {
+      nothing: () => {
+        console.log("nothing");
+      }
+    },
     userPic: "",
     dialog: false,
     drawer: false,
@@ -134,6 +139,7 @@ export default {
       { icon: "help", text: "Help" }
     ]
   }),
+
   props: {
     source: String
   }
