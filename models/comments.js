@@ -12,6 +12,14 @@ module.exports = function(sequelize, DataTypes) {
         len: [0, 255]
       }
     },
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: "0"
+    },
+    dislikes: {
+      type: DataTypes.INTEGER,
+      defaultValue: "0"
+    },
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
