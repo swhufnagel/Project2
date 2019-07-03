@@ -1,9 +1,9 @@
 <template>
   <v-content>
-    <v-container v-resize="callback" fluid fill-height>
+    <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
-          <v-card id="loginBox" v-resize="callback" class="elevation-12">
+          <v-card id="loginBox" class="elevation-12">
             <v-toolbar dark color="purple darken-3">
               <v-toolbar-title>Login</v-toolbar-title>
               <v-spacer></v-spacer>
@@ -46,15 +46,13 @@
                   <v-container fluid fill-height>
                     <v-layout align-center justify-center>
                       <v-flex xs12 sm8 md12 lg12>
-                        <form action="POST">
+                        <form action="POST" @submit="postPost()">
                           <v-text-field
                             v-model="regFirstName"
                             :counter="20"
                             label="First Name"
                             id="firstName"
                             required
-                            @input="$v.firstName.$touch()"
-                            @blur="$v.firstName.$touch()"
                           ></v-text-field>
                           <v-text-field
                             v-model="regLastName"
@@ -62,8 +60,6 @@
                             label="Last Name"
                             id="lastName"
                             required
-                            @input="$v.lastName.$touch()"
-                            @blur="$v.lastName.$touch()"
                           ></v-text-field>
                           <v-text-field
                             v-model="regUserName"
@@ -71,25 +67,14 @@
                             label="User Name"
                             id="userName"
                             required
-                            @input="$v.userName.$touch()"
-                            @blur="$v.userName.$touch()"
                           ></v-text-field>
-                          <v-text-field
-                            v-model="regEmail"
-                            label="E-mail"
-                            id="email"
-                            required
-                            @input="$v.email.$touch()"
-                            @blur="$v.email.$touch()"
-                          ></v-text-field>
+                          <v-text-field v-model="regEmail" label="E-mail" id="email" required></v-text-field>
                           <v-text-field
                             v-model="regPassword"
                             label="Password"
                             type="password"
-                            id="password"
+                            id="regPassword"
                             required
-                            @input="$v.password.$touch()"
-                            @blur="$v.password.$touch()"
                           ></v-text-field>
                           <v-text-field
                             v-model="regPasswordRepeat"
@@ -97,8 +82,6 @@
                             id="password-repeat"
                             type="password"
                             required
-                            @input="$v.passwordRepeat.$touch()"
-                            @blur="$v.passwordRepeat.$touch()"
                           ></v-text-field>
                         </form>
                       </v-flex>
@@ -108,17 +91,17 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                  <v-btn type="submit" color="blue darken-1" flat @click="dialog = false">Submit</v-btn>
+                  <v-btn type="submit" color="blue darken-1" @click="register" flat>Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-card>
           <div>
-            <v-text
+            <p
               id="newAccount"
               left
               offset-x="true"
-            >Click here to sign-up for a new Postivism account!</v-text>
+            >Click here to sign-up for a new Postivism account!</p>
           </div>
         </v-flex>
       </v-layout>
@@ -129,14 +112,15 @@
 <script>
 /* eslint-disable no-new */
 // new Vue({ el: '#app' })
+import AuthenticationService from "@/services/AuthenticationService";
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
-
+import axios from "axios";
 export default {
   data: () => {
     return {
       dialog: null,
-      loginUserName: "Enter your User Name",
+      loginUserName: "",
       loginPassword: "",
       regFirstName: "",
       regLastName: "",
@@ -146,32 +130,37 @@ export default {
       regPasswordRepeat: ""
     };
   },
-  mixins: [validationMixin],
-
-  validations: {
-    name: { required, maxLength: maxLength(10) },
-    email: { required, email },
-    select: { required }
-  },
-
-  data: () => ({
-    email: "",
-    password: ""
-  }),
-
-  computed: {
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
-      return errors;
-    }
-  },
-
   methods: {
-    submit() {
-      this.$v.$touch();
+    // async post() {
+    //   console.log("clicked");
+    //   await axios
+    //     .post("http://localhost:8080/#/", {
+    //       regFirstName: this.regFirstName,
+    //       regLastName: this.regLastName,
+    //       regUserName: this.regUserName,
+    //       regEmail: this.regEmail,
+    //       regPassword: this.regPassword,
+    //       regPasswordRepeat: this.regPasswordRepeat
+    //     })
+    //     .then(response => {
+    //       console.log(response);
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //       this.errors.push(e);
+    //     });
+    // },
+    register() {
+      var response = AuthenticationService.register({
+        regFirstName: this.regFirstName,
+        regLastName: this.regLastName,
+        regUserName: this.regUserName,
+        regEmail: this.regEmail,
+        regPassword: this.regPassword,
+        regPasswordRepeat: this.regPasswordRepeat
+      }).then(function(response) {
+        console.log("authenticated ", response);
+      });
     }
   }
 };
