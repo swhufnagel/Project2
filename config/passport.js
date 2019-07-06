@@ -11,27 +11,30 @@ passport.use(
       usernameField: "email"
     },
     function(email, password, done) {
+      console.log("hello!");
       // When a user tries to sign in this code runs
-      db.userlogin
+      db.userLogin
         .findOne({
           where: {
             email: email
           }
         })
         .then(function(dbUser) {
+          console.log(`The  account is: ${dbUser}`);
           // If there's no user with the given email
           if (!dbUser) {
+            console.log("this is incorrect email");
             return done(null, false, {
               message: "Incorrect email."
             });
-          }
-          // If there is a user with the given email, but the password the user gives us is incorrect
-          else if (!dbUser.validPassword(password)) {
+          } else if (!dbUser.validPassword(password)) {
+            console.log("incorrect password area");
             return done(null, false, {
               message: "Incorrect password."
             });
           }
           // If none of the above, return the user
+          console.log(`The authenticated account is: ${dbUser}`);
           return done(null, dbUser);
         });
     }
