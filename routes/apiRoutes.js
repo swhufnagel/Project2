@@ -1,9 +1,10 @@
 var db = require("../models");
+var passport = require("../config/passport");
 
 module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
-  app.get("/api/posts/", function(req, res) {
+  app.get("/api/posts/", passport.authenticate("local"), function(req, res) {
     postTable
       .findAll({
         limit: 10,
@@ -60,7 +61,7 @@ module.exports = function(app) {
         lastName: req.body.lastName,
         userName: req.body.userName,
         email: req.body.email,
-        password: req.body.password //Passport magic idk
+        password: req.body.password
       })
       .then(function(dblogin) {
         res.json(dblogin);
