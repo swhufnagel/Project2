@@ -7,6 +7,7 @@ var $regEmail = $("#regEmail");
 
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
+var $userImg = $("#userImg");
 // eslint-disable-next-line no-unused-vars
 var $regSubmitBtn = $("#registerSubmit");
 var $loginSubmitBtn = $("#loginButton");
@@ -66,6 +67,7 @@ var registerFormSubmit = function(event) {
     firstName: $firstName.val().trim(),
     lastName: $lastName.val().trim(),
     userName: $regUserName.val().trim(),
+    userImg: $userImg.val().trim(),
     email: $regEmail.val().trim(),
     password: $regPassword.val().trim()
   };
