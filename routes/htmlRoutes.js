@@ -5,14 +5,7 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
       res.render("index", {
-        account: dbAccount
-      });
-    });
-  });
-
-  app.get("/home", function(req, res) {
-    db.userLogin.findAll({}).then(function(dbAccount) {
-      res.render("home", {
+        msg: "Social Media!",
         account: dbAccount
       });
     });

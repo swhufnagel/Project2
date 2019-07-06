@@ -1,26 +1,161 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/account", function(req, res) {
-    db.userLogin.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Get most recent posts (based on limit)
+  app.get("/api/posts/", function(req, res) {
+    postTable
+      .findAll({
+        limit: 10,
+        where: {
+          //We need to find user id for this part.
+          //This is where we would exlude posts made by the user
+        },
+        order: [["createdAt", "DESC"]]
+      })
+      .then(function(data) {
+        res.json(data);
+      });
   });
 
-  // Create a new example
-  app.post("/api/account", function(req, res) {
-    db.userLogin.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  // Get most recent posts (based on request (as either popularity all time or past days))
+  app.get("/api/posts/:pop/:time", function(req, res) {
+    postTable
+      .findAll({
+        limit: 10,
+        where: {
+          //
+          //This is where we would exlude posts made by the user, find out where we will post the user id.
+        },
+        //may need to put the req into quotes
+        order: [[req.body.pop, "DESC"]]
+      })
+      .then(function(data) {
+        res.json(data);
+      });
   });
 
-  // Delete an example by id
+  //Gets comments on related posts
+  app.get("/api/comments/:postId", function(req, res) {
+    comments
+      .findAll({
+        where: {
+          postTablepostId: req.params.postId //Needs to be the actual post id.,
+        },
+        order: [["createdAt", "DESC"]]
+      })
+      .then(function(data) {
+        res.json(data);
+      });
+  });
+
+  //THESE BELOW NEED TO BE UPDATED
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CREATE NEW ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Create a new account/Post/Comment
+  app.post("/api/account/add", function(req, res) {
+    db.userLogin
+      .create({
+        firstName: req.body.firstname,
+        lastName: req.body.lastname,
+        userName: req.body.username,
+        email: req.body.email,
+        password: req.body.mystery //Passport magic idk
+      })
+      .then(function(dblogin) {
+        res.json(dblogin);
+        console.log("account logged!");
+      });
+  });
+
+  //Create posts need a way to link to user.
+  app.post("/api/post/add", function(req, res) {
+    db.postTables
+      .create({
+        text: req.body.text,
+        image: req.body.image,
+        likes: 0,
+        dislikes: 0,
+        userLoginuserId: req.body.postId //send help
+      })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
+  app.post("/api/comment/add", function(req, res) {
+    db.comments
+      .create({
+        text: req.body.text,
+        likes: 0,
+        dislikes: 0,
+        userLoginuserId: req.body.userId, //send help
+        postTablepostId: req.body.postId
+      })
+      .then(function(dbComment) {
+        res.json(dbComment);
+      });
+  });
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE AN ACCOUNt/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Delete an account/post/comment by id
   app.delete("/api/account/:id", function(req, res) {
     db.userLogin
       .destroy({ where: { id: req.params.id } })
-      .then(function(dbExample) {
-        res.json(dbExample);
+      .then(function(Deleted) {
+        res.json(Deleted);
+      });
+  });
+
+  app.delete("/api/post/:id", function(req, res) {
+    db.postTable
+      .destroy({ where: { id: req.params.id } })
+      .then(function(Deleted) {
+        res.json(Deleted);
+      });
+  });
+
+  app.delete("/api/comment/:id", function(req, res) {
+    db.comments
+      .destroy({ where: { id: req.params.id } })
+      .then(function(Deleted) {
+        res.json(Deleted);
+      });
+  });
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE AN ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  app.put("/api/comment/upd", function(req, res) {
+    db.comments
+      .update(
+        {
+          likes: req.body.likes,
+          dislikes: req.body.dislikes
+        },
+        {
+          where: {
+            id: req.body.id
+          }
+        }
+      )
+      .then(function(result) {
+        res.json(result);
+      });
+  });
+
+  app.put("/api/post/upd", function(req, res) {
+    db.postTable
+      .update(
+        {
+          likes: req.body.likes,
+          dislikes: req.body.dislikes
+        },
+        {
+          where: {
+            id: req.body.id
+          }
+        }
+      )
+      .then(function(result) {
+        res.json(result);
       });
   });
 };
