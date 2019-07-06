@@ -26,13 +26,13 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/account",
+      url: "api/account/add",
       data: JSON.stringify(account)
     });
   },
-  getAccount: function () {
+  getAccount: function (id) {
     return $.ajax({
-      url: "api/account",
+      url: "api/account/" +id,
       type: "GET"
     });
   },
@@ -68,6 +68,8 @@ var registerFormSubmit = function (event) {
   ) {
     alert("You must enter an your account information!");
     return;
+  } else{
+    console.log(account);
   }
 
   API.createAccount(account).then(function () {
@@ -84,7 +86,7 @@ var registerFormSubmit = function (event) {
 };
 
 // Add Event Listener to Create an Account
-$regSubmitBtn.on("click", registerFormSubmit);
+$("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 // $loginSubmitBtn.on("click", );
