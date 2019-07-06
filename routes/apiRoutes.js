@@ -73,7 +73,8 @@ module.exports = function(app) {
   });
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.json(req.user);
+    console.log("api post success!");
+    res.status(200);
   });
 
   app.get("/api/user_data", function(req, res) {
