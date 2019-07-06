@@ -34,7 +34,7 @@
                                             <div class="col-6">
 
                                                 <button class="btn waves-effect waves-light orange lighten-2 right"
-                                                     id="newPostSubmit" name="action">Post
+                                                    id="newPostSubmit" name="action">Post
                                                     <i class="material-icons right">send</i>
                                             </div>
                                         </div>
@@ -55,7 +55,8 @@
                                                 </i>
                                             </div>
                                             <div class="col-10">
-                                                <p class="postText" postId="1" class="focus-in-expand-fwd">This is a post by a person and it has a
+                                                <p class="postText" postId="1" class="focus-in-expand-fwd">This is a
+                                                    post by a person and it has a
                                                     funny statement
                                                 </p>
                                             </div>
@@ -112,8 +113,71 @@
             </div>
             <div class="col-3 hide-on-med-and-down">
                 <div class="row">
-                user info and stuff
-
+                    <div class="col-12">
+                        <div class="UserInfo">
+                            <div class="card">
+                                <div class="UserBox card-content">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i class="material-icons prefix" style="top:0px!important;">
+                                                <img style="height:45px; width:45px;"
+                                                    src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
+                                            </i>
+                                        </div>
+                                        <div class="col-10">
+                                            <p class="postText" postId="1" class="focus-in-expand-fwd">This is a post by
+                                                a person and it has a
+                                                funny statement
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="card-action commentBar">
+                                        <div class="col-4 left">
+                                            <i class="flaticon-fire tooltipped" data-position="bottom"
+                                                data-tooltip="Fire"></i>
+                                        </div>
+                                        <div class="col-4 left">
+                                            <i class="material-icons prefix">
+                                                <div style="height:20px; width: 20px;"
+                                                    class="titanic titanic-trash tooltipped" data-position="bottom"
+                                                    data-tooltip="Trash">
+                                                </div>
+                                            </i>
+                                        </div>
+                                        <div class="col-4 left">
+                                            <i id="commentIcon" class="material-icons tooltipped" data-position="bottom"
+                                                data-tooltip="Comment">comment</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="padding:10px; margin-top:-25px;" class="card-content">
+                                        <div class="col l12 m6 s3 enterComment">
+                                            <form>
+                                                <textarea class="commentTextBox" style="margin-top:6px;" id="textarea2"
+                                                    class="materialize-textarea" data-length="140"
+                                                    placeholder="  Argue with this person!"
+                                                    commentFieldId="1-1"></textarea>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="commentSection" postId="1">
+                                            <div class="comment">
+                                                <img style="height:25px; width:25px;"
+                                                    src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
+                                                <p class="commentText" commentId="1-1">This is a little comment
+                                                    hahahaha
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,7 +189,7 @@
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
     });
-   
+
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.tooltipped');
         var instances = M.Tooltip.init(elems, { margin: 0 });
