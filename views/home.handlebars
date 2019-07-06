@@ -121,9 +121,6 @@
 </div>
 <script src="/js/index.js"></script>
 <script>
-    $("#submitPost").on("click", function(){
-        event.preventDefault();
-    })
     var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
@@ -133,26 +130,12 @@
         var elems = document.querySelectorAll('.tooltipped');
         var instances = M.Tooltip.init(elems, { margin: 0 });
         var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
-      //  {{!-- tooltip.open(); --}}
+        // tooltip.open();
     });
 
     var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
-    });
-
-    $("#newPostSubmit").on("click", function() {
-        event.preventDefault();
-
-        $.post("/api/posts/add", function() {
-            var newPost = {
-                userId: userId,
-                userImg: userImg,
-                postText: $("#postTextBox"),
-                likes: 0,
-                dislikes: 0
-            }
-        });
     });
 
 </script>

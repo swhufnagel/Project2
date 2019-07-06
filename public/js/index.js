@@ -16,6 +16,7 @@ var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 // eslint-disable-next-line no-unused-vars
 var $loginSubmitBtn = $("#loginSubmit");
+// eslint-disable-next-line no-unused-vars
 var $regSubmitBtn = $("#registerSubmit");
 
 // The API object contains methods for each kind of request we'll make
@@ -32,7 +33,7 @@ var API = {
   },
   getAccount: function (id) {
     return $.ajax({
-      url: "api/account/" +id,
+      url: "api/account/" + id,
       type: "GET"
     });
   },
@@ -40,6 +41,16 @@ var API = {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
+    });
+  },
+  createPost: function(postBody) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/posts/add",
+      type: "POST",
+      data: JSON.stringify(postBody)
     });
   }
 };
@@ -66,9 +77,9 @@ var registerFormSubmit = function (event) {
       account.password
     )
   ) {
-    alert("You must enter an your account information!");
+    alert("You must enter your account information!");
     return;
-  } else{
+  } else {
     console.log(account);
   }
 
@@ -85,29 +96,44 @@ var registerFormSubmit = function (event) {
   $passwordRepeat.val("");
 };
 
-// Add Event Listener to Create an Account
-$("#registerAccountSubmit").on("click", registerFormSubmit);
-
-// Add Event Listener to Login
-// $loginSubmitBtn.on("click", );
-
-
-
-
-// Make a new Post
-$("#newPostSubmit").on("click", function() {
+var postSubmit = function (event) {
   event.preventDefault();
+
+  var postBody = $("#postTextBox").val().trim();
+
   var newPost = {
     userId: "userId",
     userImg: "userImg",
-    postText: $("#postTextBox"),
+    postText: postBody,
   };
 
-
+  API.createPost(newPost).then(function() {
+    console.log(newPost);
+  });
 
   $.post("/api/posts/add", newPost)
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
     });
+};
+
+// Add Event Listener to Create an Account
+$("#registerAccountSubmit").on("click", registerFormSubmit);
+// Add Event Listener to Login
+// $loginSubmitBtn.on("click", );
+
+// Event Listener for post submission
+$("#newPostSubmit").on("click", postSubmit);
+
+// Make a new Post
+$("#newPostSubmit").on("click", function () {
+  var postBody = $("#postTextBox").val().trim();
+
+  console.log("User:", "");
+  console.log("UserImg:", "");
+  console.log("Post:", postBody);
+
 
 });
+
+

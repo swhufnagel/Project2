@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "Goober23.",
     "database": "presentdb",
     "host": "localhost",
     "dialect": "mysql"
