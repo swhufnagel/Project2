@@ -32,6 +32,7 @@
                                                         class="material-icons">photo</i></a>
                                             </div>
                                             <div class="col-6">
+
                                                 <button class="btn waves-effect waves-light orange lighten-2 right"
                                                      id="newPostSubmit" name="action">Post
                                                     <i class="material-icons right">send</i>
@@ -120,6 +121,9 @@
 </div>
 <script src="/js/index.js"></script>
 <script>
+    $("#submitPost").on("click", function(){
+        event.preventDefault();
+    })
     var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
