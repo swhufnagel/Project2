@@ -53,13 +53,14 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CREATE NEW ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Create a new account/Post/Comment
   app.post("/api/account/add", function(req, res) {
+    console.log(req.body);
     db.userLogin
       .create({
-        firstName: req.body.firstname,
-        lastName: req.body.lastname,
-        userName: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        userName: req.body.userName,
         email: req.body.email,
-        password: req.body.mystery //Passport magic idk
+        password: req.body.password //Passport magic idk
       })
       .then(function(dblogin) {
         res.json(dblogin);

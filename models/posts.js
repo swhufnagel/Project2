@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [0, 255]
       }
     },
-    image: {
+    userImg: {
       type: DataTypes.BLOB,
       allowNull: true
     },

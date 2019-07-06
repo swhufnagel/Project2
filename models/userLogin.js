@@ -40,10 +40,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    userImg: {
-      type: DataTypes.BLOB,
-      allowNull: true
-    }
+    // userImg: {
+    //   type: DataTypes.BLOB,
+    //   allowNull: true
+    // }
   });
 
   //userLogin.hasMany(posts);
