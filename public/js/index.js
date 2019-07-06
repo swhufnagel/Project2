@@ -5,8 +5,8 @@ injectGlobal`
     src: url(${flatIcon}) format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
-`;
+  }`;
+
 // Get references to page elements
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");

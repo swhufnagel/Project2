@@ -1,13 +1,19 @@
-div{
-  font-family: 'Flaticon';
-}
+
 .card{
   margin-top: 15%!important;
   border: white solid 0px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 8px -4px, rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px !important;
 }
-#trashIcon{
-
+#leftLogo{
+  position:relative;
+  top: 35px;
+  width:250px;
+  height:237px;
+}
+#topLogo{
+  top:10px;
+  width: 375px;
+  height:57px
 }
 #openRegister{
   box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
@@ -21,9 +27,6 @@ div{
 #textarea1{
   background-color: white;
 }
-#textarea2{
-  background-color: white;
-}
 .commentText{
   display:inline-block;
   background-color: rgba(105, 27, 154, 0.699);
@@ -33,7 +36,15 @@ div{
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.comment{
+  margin-left:15%!important;
+}
 .commentTextBox{
+  margin-left:10%;
+  margin-right:auto;
+  display:block;
+  width:200%;
+  background-color: white;
   margin-top:6px!important;
   border: 1px solid grey;
   resize: none;
@@ -42,10 +53,17 @@ div{
 .postBox{
   padding: 24px 12px 9px 12px !important;
 }
+#commentIcon{
+  margin-left:auto;
+  margin-right:auto;
+}
 .commentBar{
+  width:96%;
+  margin-left:auto;
+  margin-right:auto;
   margin-bottom:2px !important; 
   border-bottom: 1px solid rgba(160,160,160,0.2)!important; 
-  padding: 5px 12px 2px 12px!important
+  padding: 5px 12px 10px 12px!important
 }
 #underLoginText{
   text-align:center;
