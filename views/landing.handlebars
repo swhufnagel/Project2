@@ -1,0 +1,78 @@
+<div id="landing">
+    <div class="container">
+        <div class="row">
+            {{!-- Login --}}
+            <div class="col-5 offset-1 login">
+                <h1>Login!</h1>
+
+                <form class="clearfix mb-4 login" action="POST">
+                        <!-- Username  -->
+                        <div class="form-group">
+                            <label for="userName">Username:</label>
+                            <input type="text" id="loginUserName" class="form-control" aria-describedby="userName"
+                                placeholder=""></input>
+                        </div>
+                        <!-- Password  -->
+                        <div class="form-group">
+                            <label for="psw">Password:</label>
+                            <input type="password" id="loginPassword" class="form-control" aria-describedby="psw"
+                                placeholder=""></input>
+                        </div>
+                        <!-- Submit Button  -->
+                        <button id="loginSubmit" class="btn btn-primary float-right">Submit</button>
+                    </form>
+
+
+                </form>
+            </div>
+            {{!-- Create Account --}}
+            <div class="col-5">
+                <h1>Create an Account</h1>
+
+                <form class="clearfix mb-4 register" action="POST">
+                    <div class="form-group">
+                        <label for="example-text">First Name:</label>
+                        <input type="text" id="firstName" class="form-control" aria-describedby="example-text"
+                            placeholder="John">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text">Last Name:</label>
+                        <input type="text" id="lastName" class="form-control" aria-describedby="example-text"
+                            placeholder="Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text">Display Name:</label>
+                        <input type="text" id="regUserName" class="form-control" aria-describedby="example-text"
+                            placeholder="Doeboy86">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text">Email:</label>
+                        <input type="text" id="email" class="form-control" aria-describedby="example-text"
+                            placeholder="jdoe@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text">Password:</label>
+                        <input type="password" id="regPassword" class="form-control" aria-describedby="example-text"
+                            placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text">Re-Enter Password:</label>
+                        <input type="password" id="regPassword-repeat" class="form-control" aria-describedby="example-text"
+                            placeholder="">
+                    </div>
+
+                    {{!-- Submit Button --}}
+                    <button id="registerSubmit" class="btn btn-primary float-right">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>

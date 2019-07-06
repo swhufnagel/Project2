@@ -1,8 +1,6 @@
-var users = require("./userLogin.js");
-var comments = require("./comments.js");
 module.exports = function(sequelize, DataTypes) {
-  var postTable = sequelize.define("postTable", {
-    postId: {
+  var comments = sequelize.define("comments", {
+    commentId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
@@ -13,10 +11,6 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [0, 255]
       }
-    },
-    image: {
-      type: DataTypes.BLOB,
-      allowNull: true
     },
     likes: {
       type: DataTypes.INTEGER,
@@ -32,5 +26,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  return postTable;
+  return comments;
 };
