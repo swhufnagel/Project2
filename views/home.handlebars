@@ -21,7 +21,7 @@
                                                     src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
                                             </div>
                                             <div class="col-10">
-                                                <textarea style="display:inline-block" id="textarea1"
+                                                <textarea style="display:inline-block" id="postTextBox"
                                                     class="materialize-textarea" data-length="140"
                                                     placeholder="  Start an argument here!"></textarea>
                                             </div>
@@ -32,8 +32,9 @@
                                                         class="material-icons">photo</i></a>
                                             </div>
                                             <div class="col-6">
-                                                <button id="submitPost" class="btn waves-effect waves-light orange lighten-2 right"
-                                                    >Post
+
+                                                <button class="btn waves-effect waves-light orange lighten-2 right"
+                                                     id="newPostSubmit" name="action">Post
                                                     <i class="material-icons right">send</i>
                                             </div>
                                         </div>
@@ -118,6 +119,7 @@
         </div>
     </div>
 </div>
+<script src="/js/index.js"></script>
 <script>
     $("#submitPost").on("click", function(){
         event.preventDefault();
@@ -131,6 +133,26 @@
         var elems = document.querySelectorAll('.tooltipped');
         var instances = M.Tooltip.init(elems, { margin: 0 });
         var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
+      //  {{!-- tooltip.open(); --}}
+    });
+
+    var titanic = new Titanic({
+        hover: true, // auto animated on hover (default true)
+        click: true  // auto animated on click/tap (default false)
+    });
+
+    $("#newPostSubmit").on("click", function() {
+        event.preventDefault();
+
+        $.post("/api/posts/add", function() {
+            var newPost = {
+                userId: userId,
+                userImg: userImg,
+                postText: $("#postTextBox"),
+                likes: 0,
+                dislikes: 0
+            }
+        });
     });
 
 </script>

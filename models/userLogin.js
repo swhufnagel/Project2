@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
     userId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+      unique: true
     },
     firstName: {
       type: DataTypes.STRING,
@@ -22,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     userName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [2, 20]
       }
@@ -29,17 +31,22 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [3, 40]
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [8, 20]
-      }
+      allowNull: false
+    },
+    userImg: {
+      type: DataTypes.BLOB,
+      allowNull: true
     }
   });
+
+  //userLogin.hasMany(posts);
+  //userLogin.hasMany();
   return userLogin;
 };
