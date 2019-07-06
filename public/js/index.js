@@ -88,6 +88,7 @@ $("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 $loginSubmitBtn.on("click", function() {
+  event.preventDefault();
   console.log("logging in");
   var email = $("#email")
     .val()

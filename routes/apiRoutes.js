@@ -74,7 +74,13 @@ module.exports = function(app) {
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("api post success!");
-    res.status(200);
+    res.json(req.user);
+  });
+
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
   });
 
   app.get("/api/user_data", function(req, res) {
