@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-3 hide-on-med-and-down">
                 <div class="row">
-                    <div class="col s3 m6 l12">
-                        <img id="leftLogo" src="/images/leftLogo.png">
+                    <div class="col-12">
+                        <img id="leftLogo" src="/images/leftLogo.png" class="focus-in-expand-fwd">
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                                                 </i>
                                             </div>
                                             <div class="col-10">
-                                                <p class="postText" postId="1">This is a post by a person and it has a
+                                                <p class="postText" postId="1" class="focus-in-expand-fwd">This is a post by a person and it has a
                                                     funny statement
                                                 </p>
                                             </div>
@@ -109,22 +109,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-3 hide-on-med-and-down">
+                <div class="row">
                 user info and stuff
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.tooltipped');
-        var instances = M.Tooltip.init(elems, { margin: 0 });
-        var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
-        tooltip.open();
-    });
-
     var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
     });
+   
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems, { margin: 0 });
+        var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
+    });
+
 </script>
