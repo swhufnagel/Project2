@@ -2,7 +2,7 @@
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
 var $regUserName = $("#regUserName");
-var $email = $("#email");
+var $email = $("#regEmail");
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 // eslint-disable-next-line no-unused-vars
