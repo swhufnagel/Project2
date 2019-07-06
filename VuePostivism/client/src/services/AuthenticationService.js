@@ -1,9 +1,9 @@
-import api from "@/services/api";
+import api from "@/services/Api";
 
 export default {
   register(credentials) {
     console.log("trying");
-    return api().post("login", credentials);
+    return api().post("api/account", credentials);
   }
 };
 

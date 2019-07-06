@@ -11,6 +11,14 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/home", function(req, res) {
+    db.userLogin.findAll({}).then(function(dbAccount) {
+      res.render("home", {
+        account: dbAccount
+      });
+    });
+  });
+
   // Load example page and pass in an example by id
   app.get("/account/:id", function(req, res) {
     db.userLogin

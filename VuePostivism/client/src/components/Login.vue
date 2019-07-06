@@ -46,7 +46,7 @@
                   <v-container fluid fill-height>
                     <v-layout align-center justify-center>
                       <v-flex xs12 sm8 md12 lg12>
-                        <form action="POST" @submit="postPost()">
+                        <form action="POST">
                           <v-text-field
                             v-model="regFirstName"
                             :counter="20"
@@ -91,7 +91,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-                  <v-btn type="submit" color="blue darken-1" @click="register" flat>Submit</v-btn>
+                  <v-btn type="submit" color="blue darken-1" flat>Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -116,6 +116,7 @@ import AuthenticationService from "@/services/AuthenticationService";
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
 import axios from "axios";
+import Api from "#/services/Api.js"
 export default {
   data: () => {
     return {
@@ -151,6 +152,7 @@ export default {
     //     });
     // },
     register() {
+      console.log(regFirstName);
       var response = AuthenticationService.register({
         regFirstName: this.regFirstName,
         regLastName: this.regLastName,
