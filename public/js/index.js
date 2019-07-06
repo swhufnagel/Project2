@@ -2,10 +2,13 @@
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
 var $regUserName = $("#regUserName");
+
 var $regEmail = $("#regEmail");
+
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 // eslint-disable-next-line no-unused-vars
+var $regSubmitBtn = $("#registerSubmit");
 var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
@@ -21,6 +24,7 @@ var API = {
     });
   },
 
+
   getAccount: function(email, password) {
     $.post("/api/login", {
       email: email,
@@ -33,11 +37,22 @@ var API = {
       .catch(function(err) {
         console.log(err);
       });
+
   },
   deleteAccount: function(id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
+    });
+  },
+  createPost: function(postBody) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/posts/add",
+      type: "POST",
+      data: JSON.stringify(postBody)
     });
   }
 };
@@ -64,7 +79,7 @@ var registerFormSubmit = function(event) {
       account.password
     )
   ) {
-    alert("You must enter an your account information!");
+    alert("You must enter your account information!");
     return;
   } else {
     console.log(account);
@@ -82,6 +97,42 @@ var registerFormSubmit = function(event) {
   $regPassword.val("");
   $passwordRepeat.val("");
 };
+
+var postSubmit = function (event) {
+  event.preventDefault();
+
+  var postBody = $("#postTextBox").val().trim();
+
+  var newPost = {
+    userId: "userId",
+    userImg: "userImg",
+    postText: postBody,
+  };
+
+  API.createPost(newPost).then(function() {
+    console.log(newPost);
+  });
+
+  $.post("/api/posts/add", newPost)
+    .then(function (data) {
+      console.log(data);
+    });
+};
+
+// Event Listener for post submission
+$("#newPostSubmit").on("click", postSubmit);
+
+// Make a new Post
+$("#newPostSubmit").on("click", function () {
+  var postBody = $("#postTextBox").val().trim();
+
+  console.log("User:", "");
+  console.log("UserImg:", "");
+  console.log("Post:", postBody);
+
+
+});
+
 
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);

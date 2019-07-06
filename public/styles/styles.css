@@ -73,6 +73,14 @@
   position:fixed;
   margin-left: 92px;
 }
+#userBoxPic, #userBoxName{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#userInfo{
+  margin-top:35%;
+}
 .photoButt{
   height:40px !important;
   width:40px !important;
