@@ -1,11 +1,11 @@
-import flatIcon from "styles/Flaticon.ttf";
-injectGlobal`
-  @font-face {
-    font-family: 'Flaticon';
-    src: url(${flatIcon}) format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }`;
+// import flatIcon from "styles/Flaticon.ttf";
+// injectGlobal`
+//   @font-face {
+//     font-family: 'Flaticon';
+//     src: url(${flatIcon}) format('woff2');
+//     font-weight: normal;
+//     font-style: normal;
+//   }`;
 
 // Get references to page elements
 var $firstName = $("#firstName");
@@ -20,7 +20,7 @@ var $regSubmitBtn = $("#registerSubmit");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  createAccount: function(account) {
+  createAccount: function (account) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -30,13 +30,13 @@ var API = {
       data: JSON.stringify(account)
     });
   },
-  getAccount: function() {
+  getAccount: function () {
     return $.ajax({
       url: "api/account",
       type: "GET"
     });
   },
-  deleteAccount: function(id) {
+  deleteAccount: function (id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
@@ -46,7 +46,7 @@ var API = {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var registerFormSubmit = function(event) {
+var registerFormSubmit = function (event) {
   event.preventDefault();
 
   var account = {
@@ -70,7 +70,7 @@ var registerFormSubmit = function(event) {
     return;
   }
 
-  API.createAccount(account).then(function() {
+  API.createAccount(account).then(function () {
     console.table(account);
     // refreshAccount();
   });
@@ -88,3 +88,24 @@ $regSubmitBtn.on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 // $loginSubmitBtn.on("click", );
+
+
+
+
+// Make a new Post
+$("#newPostSubmit").on("click", function() {
+  event.preventDefault();
+  var newPost = {
+    userId: "userId",
+    userImg: "userImg",
+    postText: $("#postTextBox"),
+  };
+
+
+
+  $.post("/api/posts/add", newPost)
+    .then(function(data) {
+      console.log(data);
+    });
+
+});
