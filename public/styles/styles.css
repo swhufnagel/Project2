@@ -1,7 +1,59 @@
+div{
+  font-family: 'Flaticon';
+}
 .card{
   margin-top: 15%!important;
   border: white solid 0px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 8px -4px, rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px !important;
+}
+#trashIcon{
+
+}
+#openRegister{
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+}
+#loginCard{
+  max-width:550px;
+}
+.fixed-action-btn{
+  width: 60px!important;
+}
+#textarea1{
+  background-color: white;
+}
+#textarea2{
+  background-color: white;
+}
+.commentText{
+  display:inline-block;
+  background-color: rgba(105, 27, 154, 0.699);
+  color: white;
+  border-radius: 20px;
+  padding: 4px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.commentTextBox{
+  margin-top:6px!important;
+  border: 1px solid grey;
+  resize: none;
+  height:28px;
+}
+.postBox{
+  padding: 24px 12px 9px 12px !important;
+}
+.commentBar{
+  margin-bottom:2px !important; 
+  border-bottom: 1px solid rgba(160,160,160,0.2)!important; 
+  padding: 5px 12px 2px 12px!important
+}
+#underLoginText{
+  text-align:center;
+  color: rgb(141, 141, 141);
+  margin-top: -13px;
+  z-index: 999;
+  position:fixed;
+  margin-left: 92px;
 }
 .photoButt{
   height:40px !important;
