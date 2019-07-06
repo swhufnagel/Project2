@@ -67,6 +67,7 @@ module.exports = function(app) {
         res.redirect(307, "/api/login");
       })
       .catch(function(err) {
+        console.log("What????");
         res.status(401).json(err);
       });
   });
