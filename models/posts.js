@@ -1,5 +1,3 @@
-var users = require("./userLogin.js");
-var comments = require("./comments.js");
 module.exports = function(sequelize, DataTypes) {
   var postTable = sequelize.define("postTable", {
     postId: {
