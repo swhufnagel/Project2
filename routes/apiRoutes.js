@@ -62,7 +62,7 @@ module.exports = function(app) {
         password: req.body.mystery //Passport magic idk
       })
       .then(function(dblogin) {
-        // res.json(dblogin);
+        res.json(dblogin);
         console.log("account logged!");
       });
   });

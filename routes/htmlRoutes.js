@@ -4,7 +4,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
-      res.render("landing", {
+      res.render("index", {
         msg: "Social Media!",
         account: dbAccount
       });
