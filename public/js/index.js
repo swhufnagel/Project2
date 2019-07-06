@@ -10,7 +10,7 @@ var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  createAccount: function (account) {
+  createAccount: function(account) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -20,15 +20,17 @@ var API = {
       data: JSON.stringify(account)
     });
   },
+
   getAccount: function (email, password) {
     console.log(email + " " + password);
     return $.ajax({
       url: "api/login/",
       type: "POST",
       data: JSON.stringify(email, password)
+
     });
   },
-  deleteAccount: function (id) {
+  deleteAccount: function(id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
@@ -38,7 +40,7 @@ var API = {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var registerFormSubmit = function (event) {
+var registerFormSubmit = function(event) {
   event.preventDefault();
 
   var account = {
@@ -64,7 +66,7 @@ var registerFormSubmit = function (event) {
     console.log(account);
   }
 
-  API.createAccount(account).then(function () {
+  API.createAccount(account).then(function() {
     console.table(account);
     // refreshAccount();
   });
@@ -92,23 +94,17 @@ $loginSubmitBtn.on("click", function () {
   });
 });
 
-
-
-
 // Make a new Post
 $("#newPostSubmit").on("click", function () {
   event.preventDefault();
   var newPost = {
     userId: "userId",
     userImg: "userImg",
-    postText: $("#postTextBox"),
+    postText: $("#postTextBox")
   };
 
 
-
-  $.post("/api/posts/add", newPost)
-    .then(function (data) {
-      console.log(data);
-    });
-
+  $.post("/api/posts/add", newPost).then(function(data) {
+    console.log(data);
+  });
 });
