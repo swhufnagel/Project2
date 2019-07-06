@@ -1,12 +1,3 @@
-// import flatIcon from "styles/Flaticon.ttf";
-// injectGlobal`
-//   @font-face {
-//     font-family: 'Flaticon';
-//     src: url(${flatIcon}) format('woff2');
-//     font-weight: normal;
-//     font-style: normal;
-//   }`;
-
 // Get references to page elements
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
@@ -15,8 +6,7 @@ var $email = $("#email");
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 // eslint-disable-next-line no-unused-vars
-var $loginSubmitBtn = $("#loginSubmit");
-var $regSubmitBtn = $("#registerSubmit");
+var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -30,10 +20,14 @@ var API = {
       data: JSON.stringify(account)
     });
   },
-  getAccount: function(id) {
+
+  getAccount: function (email, password) {
+    console.log(email + " " + password);
     return $.ajax({
-      url: "api/account/" + id,
-      type: "GET"
+      url: "api/login/",
+      type: "POST",
+      data: JSON.stringify(email, password)
+
     });
   },
   deleteAccount: function(id) {
@@ -89,16 +83,26 @@ var registerFormSubmit = function(event) {
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
-// $loginSubmitBtn.on("click", );
+$loginSubmitBtn.on("click", function () {
+  console.log("logging in");
+  var email = $("#email").val().trim();
+  var password = $("#password").val().trim();
+
+  API.getAccount(email, password).then(function(response){
+    event.preventDefault();
+    console.log(response);
+  });
+});
 
 // Make a new Post
-$("#newPostSubmit").on("click", function() {
+$("#newPostSubmit").on("click", function () {
   event.preventDefault();
   var newPost = {
     userId: "userId",
     userImg: "userImg",
     postText: $("#postTextBox")
   };
+
 
   $.post("/api/posts/add", newPost).then(function(data) {
     console.log(data);
