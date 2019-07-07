@@ -54,7 +54,7 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CREATE NEW ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Create a new account/Post/Comment
   app.post("/api/account/add", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.userLogin
       .create({
         firstName: req.body.firstName,
@@ -71,19 +71,27 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
+  function ensureAuthenticated (req, res, next) {
+    if (req.isAuthenticated()) {
+      console.log("authenticated and going home");
+      res.redirect("/home");
+      return next;
+    }
+    res.redirect("/");
+  }
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("api post success!");
     res.json(req.user);
+    // res.redirect("/home");
   });
-
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
 
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", ensureAuthenticated, function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});

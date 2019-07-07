@@ -7,7 +7,7 @@ var $regEmail = $("#regEmail");
 
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
-var $userImg = $("#userImg");
+// var $userImg = $("#userImg");
 // eslint-disable-next-line no-unused-vars
 var $regSubmitBtn = $("#registerSubmit");
 var $loginSubmitBtn = $("#loginButton");
@@ -57,7 +57,18 @@ var API = {
     });
   }
 };
-
+$("#homeButt").on("click",function() {
+  event.preventDefault();
+  console.log("home");
+  //if a user is not logged in the home button will bring them to login screen and if they are logged in
+  //it will bring them to the home screen
+  var loggedIn =false;
+  if(loggedIn === false ){
+    window.location.href = "/";
+  } else{
+    window.location.href = "/home";
+  }
+});
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var registerFormSubmit = function(event) {
@@ -67,7 +78,7 @@ var registerFormSubmit = function(event) {
     firstName: $firstName.val().trim(),
     lastName: $lastName.val().trim(),
     userName: $regUserName.val().trim(),
-    userImg: $userImg.val().trim(),
+    // userImg: $userImg.val().trim(),
     email: $regEmail.val().trim(),
     password: $regPassword.val().trim()
   };

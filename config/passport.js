@@ -11,7 +11,6 @@ passport.use(
       usernameField: "email"
     },
     function(email, password, done) {
-      console.log("hello!");
       // When a user tries to sign in this code runs
       db.userLogin
         .findOne({
@@ -20,7 +19,8 @@ passport.use(
           }
         })
         .then(function(dbUser) {
-          console.log(`The  account is: ${dbUser}`);
+          console.log("user",dbUser);
+          console.log(dbUser.dataValues.userName);
           // If there's no user with the given email
           if (!dbUser) {
             console.log("this is incorrect email");
@@ -34,7 +34,7 @@ passport.use(
             });
           }
           // If none of the above, return the user
-          console.log(`The authenticated account is: ${dbUser}`);
+          console.log("user", dbUser);
           return done(null, dbUser);
         });
     }
