@@ -34,7 +34,7 @@ passport.use(
             });
           }
           // If none of the above, return the user
-          console.log(`The authenticated account is: ${dbUser}`);
+          console.log("user", dbUser);
           return done(null, dbUser);
         });
     }
