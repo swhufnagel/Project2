@@ -54,7 +54,7 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CREATE NEW ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Create a new account/Post/Comment
   app.post("/api/account/add", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.userLogin
       .create({
         firstName: req.body.firstName,
@@ -74,7 +74,8 @@ module.exports = function(app) {
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("api post success!");
-    res.json(req.user);
+    // req.json(req.user);
+    res.redirect("/home");
   });
 
   // Route for logging user out
