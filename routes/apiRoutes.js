@@ -106,17 +106,20 @@ module.exports = function(app) {
   });
 
   //Create posts need a way to link to user.
-  app.post("/api/post/add", function(req, res) {
-    db.postTables
+  app.post("/api/posts/add", function(req, res) {
+    console.log("new post req", req.body);
+    // console.log("res:", res);
+    db.postTable
       .create({
         text: req.body.text,
-        image: req.body.image,
+        image: "",
         likes: 0,
         dislikes: 0,
-        userLoginuserId: req.body.postId //send help
+        // userLoginuserId: 0
       })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(res) {
+        // res.status(status);
+        console.log("response", res);
       });
   });
 

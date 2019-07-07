@@ -45,18 +45,9 @@ var API = {
       url: "api/account/" + id,
       type: "DELETE"
     });
-  },
-  createPost: function(postBody) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      url: "api/posts/add",
-      type: "POST",
-      data: JSON.stringify(postBody)
-    });
   }
 };
+
 $("#homeButt").on("click",function() {
   event.preventDefault();
   console.log("home");
@@ -111,42 +102,6 @@ var registerFormSubmit = function(event) {
   $passwordRepeat.val("");
 };
 
-var postSubmit = function (event) {
-  event.preventDefault();
-
-  var postBody = $("#postTextBox").val().trim();
-
-  var newPost = {
-    userId: "userId",
-    userImg: "userImg",
-    postText: postBody,
-  };
-
-  API.createPost(newPost).then(function() {
-    console.log(newPost);
-  });
-
-  $.post("/api/posts/add", newPost)
-    .then(function (data) {
-      console.log(data);
-    });
-};
-
-// Event Listener for post submission
-$("#newPostSubmit").on("click", postSubmit);
-
-// Make a new Post
-$("#newPostSubmit").on("click", function () {
-  var postBody = $("#postTextBox").val().trim();
-
-  console.log("User:", "");
-  console.log("UserImg:", "");
-  console.log("Post:", postBody);
-
-
-});
-
-
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
@@ -166,13 +121,29 @@ $loginSubmitBtn.on("click", function() {
 // Make a new Post
 $("#newPostSubmit").on("click", function() {
   event.preventDefault();
+
+  var postText = $("#postTextBox").val().trim();
+
+  event.preventDefault();
   var newPost = {
-    userId: "userId",
-    userImg: "userImg",
-    postText: $("#postTextBox")
+    text: postText,
+    // eslint-disable-next-line no-multi-spaces
+    image: "userImg",   // This still needs to be linked from login
+    likes: 0,
+    dislikes: 0,
+    // userLoginUserId: 0     // This also needs to be linked from login
   };
 
+  console.log(newPost);
+
   $.post("/api/posts/add", newPost).then(function(data) {
-    console.log(data);
+    console.log("submitted data:", data); // This doesn't log anything
   });
+
+  // Clear form data
+  $("#postTextBox").val("");
 });
+
+
+
+
