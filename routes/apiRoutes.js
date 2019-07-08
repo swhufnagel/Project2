@@ -5,11 +5,12 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
   app.get("/api/post/", function(req, res) {
+    console.log("post request ",req);
     postTable
       .findAll({
         limit: 10,
         where: {
-          //We need to find user id for this part.
+          userId: req.//We need to find user id for this part.
           //This is where we would exlude posts made by the user
         },
         order: [["createdAt", "DESC"]]
