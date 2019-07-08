@@ -4,7 +4,7 @@ var passport = require("../config/passport");
 module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
-  app.get("/api/posts/", function(req, res) {
+  app.get("/api/post/", function(req, res) {
     postTable
       .findAll({
         limit: 10,
@@ -20,7 +20,7 @@ module.exports = function(app) {
   });
 
   // Get most recent posts (based on request (as either popularity all time or past days))
-  app.get("/api/posts/:pop/:time", function(req, res) {
+  app.get("/api/post/:pop/:time", function(req, res) {
     postTable
       .findAll({
         limit: 10,
@@ -71,14 +71,6 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
-  function ensureAuthenticated (req, res, next) {
-    if (req.isAuthenticated()) {
-      console.log("authenticated and going home");
-      res.redirect("/home");
-      return next;
-    }
-    res.redirect("/");
-  }
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("api post success!");
@@ -90,22 +82,44 @@ module.exports = function(app) {
     req.logout();
     res.redirect("/");
   });
-
-  app.get("/api/user_data", ensureAuthenticated, function(req, res) {
+  function ensureAuthenticated (req, res, next) {
+    if (req.isAuthenticated()) {
+      console.log("authenticated and going home");
+      res.redirect("/home");
+      return next;
+    }
+    res.redirect("/");
+  }
+  app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
+      console.log("not logged in");
       res.json({});
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.userId,
+        userName: req.user.userName
       });
     }
   });
+  // app.get("/api/user_data", ensureAuthenticated, function(req, res) {
+  //   if (!req.user) {
+  //     // The user is not logged in, send back an empty object
+  //     console.log("Please login to continue");
+  //     console.alert("Please login to continue");
+  //     res.json({});
+  //   } else {
+  //     // Otherwise send back the user's email and id
+  //     // Sending back a password, even a hashed password, isn't a good idea
+  //     sendToFront();
+  //   }
+  // });
 
   //Create posts need a way to link to user.
+
   app.post("/api/posts/add", function(req, res) {
     console.log("new post req", req.body);
     // console.log("res:", res);

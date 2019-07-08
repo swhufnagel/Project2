@@ -19,7 +19,6 @@ passport.use(
           }
         })
         .then(function(dbUser) {
-          console.log("user",dbUser);
           console.log(dbUser.dataValues.userName);
           // If there's no user with the given email
           if (!dbUser) {
@@ -34,7 +33,6 @@ passport.use(
             });
           }
           // If none of the above, return the user
-          console.log("user", dbUser);
           return done(null, dbUser);
         });
     }

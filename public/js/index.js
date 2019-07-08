@@ -31,11 +31,12 @@ var API = {
       email: email,
       password: password
     })
-      .then(function(res) {
-        console.log(res);
+      .then(function() {
+        window.location.replace("/home");
         // If there's an error, log the error
       })
       .catch(function(err) {
+        console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
 
@@ -44,6 +45,17 @@ var API = {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
+    });
+
+  },
+  createPost: function(postBody) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/post/add",
+      type: "POST",
+      data: JSON.stringify(postBody)
     });
   }
 };
@@ -102,13 +114,39 @@ var registerFormSubmit = function(event) {
   $passwordRepeat.val("");
 };
 
+
+var postSubmit = function (event) {
+  event.preventDefault();
+
+  var postBody = $("#postTextBox").val().trim();
+
+  var newPost = {
+    userId: "userId",
+    userImg: "userImg",
+    postText: postBody,
+  };
+
+  API.createPost(newPost).then(function() {
+    console.log("newPost ", newPost);
+  });
+
+  $.post("/api/post/add", newPost)
+    .then(function (data) {
+      console.log("data ", data);
+    });
+};
+
+// Event Listener for post submission
+
+// Make a new Post
+$("#newPostSubmit").on("click", postSubmit);
+
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 $loginSubmitBtn.on("click", function() {
   event.preventDefault();
-  console.log("logging in");
   var email = $("#email")
     .val()
     .trim();
@@ -117,7 +155,6 @@ $loginSubmitBtn.on("click", function() {
     .trim();
   API.getAccount(email, password);
 });
-
 // Make a new Post
 $("#newPostSubmit").on("click", function() {
   event.preventDefault();
@@ -143,7 +180,3 @@ $("#newPostSubmit").on("click", function() {
   // Clear form data
   $("#postTextBox").val("");
 });
-
-
-
-
