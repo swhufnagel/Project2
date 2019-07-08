@@ -10,7 +10,7 @@ module.exports = function(app) {
       .findAll({
         limit: 10,
         where: {
-          userId: req.//We need to find user id for this part.
+          //We need to find user id for this part.
           //This is where we would exlude posts made by the user
         },
         order: [["createdAt", "DESC"]]
@@ -102,7 +102,8 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.userId,
-        userName: req.user.userName
+        userName: req.user.userName,
+        userImg: req.user.userImg
       });
     }
   });

@@ -1,5 +1,5 @@
 var db = require("../models");
-// var isAuthenticated = require("../config/middleware/isAuthenticated");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
   // Load index page
@@ -11,7 +11,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/home", function(req, res) {
+  app.get("/home", isAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
       res.render("home", {
         account: dbAccount
