@@ -115,32 +115,6 @@ var registerFormSubmit = function(event) {
 };
 
 
-// var postSubmit = function (event) {
-//   event.preventDefault();
-
-//   var postBody = $("#postTextBox").val().trim();
-
-//   var newPost = {
-//     userId: "userId",
-//     userImg: "userImg",
-//     postText: postBody,
-//   };
-
-//   API.createPost(newPost).then(function() {
-//     console.log("newPost ", newPost);
-//   });
-
-//   $.post("/api/post/add", newPost)
-//     .then(function (data) {
-//       console.log("data ", data);
-//     });
-// };
-
-// // Event Listener for post submission
-
-// // Make a new Post
-// $("#newPostSubmit").on("click", postSubmit);
-
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
@@ -156,7 +130,14 @@ $loginSubmitBtn.on("click", function() {
   API.getAccount(email, password);
 });
 // Make a new Post
-$("#newPostSubmit").on("click", function() {
+var newPostDOM = function(postText){
+  console.log("adding this ", postText);
+  var newPost = $("<div>", {id: "newPost2", class: "post"});
+  $(newPost).append($("#testPost").html());
+  $("#postText").text(postText);
+  $("#postContainer").append(newPost);
+};
+$(document).on("click", "#newPostSubmit", function() {
   event.preventDefault();
 
   var postText = $("#postTextBox").val().trim();
@@ -170,13 +151,12 @@ $("#newPostSubmit").on("click", function() {
     dislikes: 0,
     // userLoginUserId: 0     // This also needs to be linked from login
   };
-
   console.log(newPost);
+  newPostDOM(postText);
 
   $.post("/api/post/add", newPost).then(function(data) {
     console.log("submitted data:", data); // This doesn't log anything
   });
-
   // Clear form data
   $("#postTextBox").val("");
 });
