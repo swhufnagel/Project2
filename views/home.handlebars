@@ -44,7 +44,9 @@
                             </div>
                         </div>
                         <div id="postContainer">
-                            <div style="display: none" id="testPost" class="post">
+
+                            {{#each account}}
+                            <div id="testPost" class="post">
                                 <div class="card">
                                     <div class="postBox card-content">
                                         <div class="row">
@@ -55,7 +57,8 @@
                                                 </i>
                                             </div>
                                             <div class="col-10">
-                                                <p id="postText"></p>
+                                                {{!-- <p id="postText"></p> --}}
+                                                <p>{{this.text}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -98,6 +101,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{/each}}
                             <div id="newPost" class="post">
                                 <div class="card">
                                     <div class="postBox card-content">
@@ -206,6 +211,8 @@
         // and updates the HTML on the page
         $.get("/api/user_data").then(function (data) {
             $("#userBoxName").text(data.userName);
+
+            localStorage.setItem("userId", data.id)
             console.log("data from backend ", data);
         });
     });

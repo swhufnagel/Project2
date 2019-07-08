@@ -133,8 +133,10 @@ module.exports = function(app) {
         dislikes: 0,
         // userLoginuserId: 0
       })
-      .then(function(res) {
+      .then(function(data) {
         // res.status(status);
+        console.log(data.postId);
+        res.json(data);
         console.log("new post added");
       });
   });

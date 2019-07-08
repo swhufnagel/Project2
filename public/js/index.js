@@ -14,7 +14,7 @@ var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  createAccount: function(account) {
+  createAccount: function (account) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -26,29 +26,29 @@ var API = {
   },
 
 
-  getAccount: function(email, password) {
+  getAccount: function (email, password) {
     $.post("/api/login", {
       email: email,
       password: password
     })
-      .then(function() {
+      .then(function () {
         window.location.replace("/home");
         // If there's an error, log the error
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
 
   },
-  deleteAccount: function(id) {
+  deleteAccount: function (id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
     });
 
   },
-  createPost: function(postBody) {
+  createPost: function (postBody) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -60,21 +60,21 @@ var API = {
   }
 };
 
-$("#homeButt").on("click",function() {
+$("#homeButt").on("click", function () {
   event.preventDefault();
   console.log("home");
   //if a user is not logged in the home button will bring them to login screen and if they are logged in
   //it will bring them to the home screen
-  var loggedIn =false;
-  if(loggedIn === false ){
+  var loggedIn = false;
+  if (loggedIn === false) {
     window.location.href = "/";
-  } else{
+  } else {
     window.location.href = "/home";
   }
 });
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var registerFormSubmit = function(event) {
+var registerFormSubmit = function (event) {
   event.preventDefault();
 
   var account = {
@@ -101,8 +101,9 @@ var registerFormSubmit = function(event) {
     console.log(account);
   }
 
-  API.createAccount(account).then(function() {
+  API.createAccount(account).then(function (data) {
     console.table(account);
+    console.log(data)
     // refreshAccount();
   });
 
@@ -119,7 +120,7 @@ var registerFormSubmit = function(event) {
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
-$loginSubmitBtn.on("click", function() {
+$loginSubmitBtn.on("click", function () {
   event.preventDefault();
   var email = $("#email")
     .val()
@@ -130,14 +131,14 @@ $loginSubmitBtn.on("click", function() {
   API.getAccount(email, password);
 });
 // Make a new Post
-var newPostDOM = function(postText){
+var newPostDOM = function (postText) {
   console.log("adding this ", postText);
-  var newPost = $("<div>", {id: "newPost2", class: "post"});
+  var newPost = $("<div>", { id: postId, class: "post" });
   $(newPost).append($("#testPost").html());
   $("#postText").text(postText);
   $("#postContainer").append(newPost);
 };
-$(document).on("click", "#newPostSubmit", function() {
+$(document).on("click", "#newPostSubmit", function () {
   event.preventDefault();
 
   var postText = $("#postTextBox").val().trim();
@@ -149,14 +150,15 @@ $(document).on("click", "#newPostSubmit", function() {
     image: "userImg",   // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
-    // userLoginUserId: 0     // This also needs to be linked from login
+    userLoginUserId: parseInt(localStorage.getItem("userId"))     // This also needs to be linked from login
   };
   console.log(newPost);
-  newPostDOM(postText);
-
-  $.post("/api/post/add", newPost).then(function(data) {
-    console.log("submitted data:", data); // This doesn't log anything
+  $.post("/api/post/add", newPost).then(function (data) {
+    console.log("submitted data:", data);
+    var postId = data.postId;
+    console.log(postId);
   });
+  // newPostDOM(postText);
   // Clear form data
   $("#postTextBox").val("");
 });

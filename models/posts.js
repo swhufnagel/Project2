@@ -30,5 +30,13 @@ module.exports = function(sequelize, DataTypes) {
     // }
   });
 
+  postTable.asociate = function(models){
+    postTable.belongsTo(models.userLogin, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return postTable;
 };
