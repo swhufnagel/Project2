@@ -19,7 +19,7 @@ passport.use(
           }
         })
         .then(function(dbUser) {
-          console.log(dbUser.dataValues.userName);
+          // console.log(dbUser.dataValues.userName);
           // If there's no user with the given email
           if (!dbUser) {
             console.log("this is incorrect email");
