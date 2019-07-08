@@ -13,9 +13,9 @@ module.exports = function(app) {
 
   app.get("/home", isAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
-      res.render("home", {
-        account: dbAccount
-      });
+      console.log(dbAccount);
+      res.render("home", { account: dbAccount });
+      
     });
   });
 
