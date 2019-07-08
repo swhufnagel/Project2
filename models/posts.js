@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [0, 255]
       }
     },
-    userImg: {
+    image: {
       type: DataTypes.BLOB,
       allowNull: true
     },

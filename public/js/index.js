@@ -46,6 +46,7 @@ var API = {
       url: "api/account/" + id,
       type: "DELETE"
     });
+
   },
   createPost: function(postBody) {
     return $.ajax({
@@ -113,6 +114,7 @@ var registerFormSubmit = function(event) {
   $passwordRepeat.val("");
 };
 
+
 var postSubmit = function (event) {
   event.preventDefault();
 
@@ -138,6 +140,7 @@ var postSubmit = function (event) {
 
 // Make a new Post
 $("#newPostSubmit").on("click", postSubmit);
+
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
@@ -153,3 +156,27 @@ $loginSubmitBtn.on("click", function() {
   API.getAccount(email, password);
 });
 // Make a new Post
+$("#newPostSubmit").on("click", function() {
+  event.preventDefault();
+
+  var postText = $("#postTextBox").val().trim();
+
+  event.preventDefault();
+  var newPost = {
+    text: postText,
+    // eslint-disable-next-line no-multi-spaces
+    image: "userImg",   // This still needs to be linked from login
+    likes: 0,
+    dislikes: 0,
+    // userLoginUserId: 0     // This also needs to be linked from login
+  };
+
+  console.log(newPost);
+
+  $.post("/api/posts/add", newPost).then(function(data) {
+    console.log("submitted data:", data); // This doesn't log anything
+  });
+
+  // Clear form data
+  $("#postTextBox").val("");
+});
