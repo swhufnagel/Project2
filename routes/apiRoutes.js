@@ -120,7 +120,7 @@ module.exports = function(app) {
 
   //Create posts need a way to link to user.
 
-  app.post("/api/posts/add", function(req, res) {
+  app.post("/api/post/add", function(req, res) {
     console.log("new post req", req.body);
     // console.log("res:", res);
     db.postTable
@@ -133,7 +133,7 @@ module.exports = function(app) {
       })
       .then(function(res) {
         // res.status(status);
-        console.log("response", res);
+        console.log("new post added");
       });
   });
 
