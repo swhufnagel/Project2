@@ -31,11 +31,12 @@ var API = {
       email: email,
       password: password
     })
-      .then(function(res) {
-        console.log(res);
+      .then(function() {
+        window.location.replace("/home");
         // If there's an error, log the error
       })
       .catch(function(err) {
+        console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
 
@@ -51,12 +52,13 @@ var API = {
       headers: {
         "Content-Type": "application/json"
       },
-      url: "api/posts/add",
+      url: "api/post/add",
       type: "POST",
       data: JSON.stringify(postBody)
     });
   }
 };
+
 $("#homeButt").on("click",function() {
   event.preventDefault();
   console.log("home");
@@ -123,37 +125,25 @@ var postSubmit = function (event) {
   };
 
   API.createPost(newPost).then(function() {
-    console.log(newPost);
+    console.log("newPost ", newPost);
   });
 
-  $.post("/api/posts/add", newPost)
+  $.post("/api/post/add", newPost)
     .then(function (data) {
-      console.log(data);
+      console.log("data ", data);
     });
 };
 
 // Event Listener for post submission
-$("#newPostSubmit").on("click", postSubmit);
 
 // Make a new Post
-$("#newPostSubmit").on("click", function () {
-  var postBody = $("#postTextBox").val().trim();
-
-  console.log("User:", "");
-  console.log("UserImg:", "");
-  console.log("Post:", postBody);
-
-
-});
-
-
+$("#newPostSubmit").on("click", postSubmit);
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 $loginSubmitBtn.on("click", function() {
   event.preventDefault();
-  console.log("logging in");
   var email = $("#email")
     .val()
     .trim();
@@ -162,17 +152,4 @@ $loginSubmitBtn.on("click", function() {
     .trim();
   API.getAccount(email, password);
 });
-
 // Make a new Post
-$("#newPostSubmit").on("click", function() {
-  event.preventDefault();
-  var newPost = {
-    userId: "userId",
-    userImg: "userImg",
-    postText: $("#postTextBox")
-  };
-
-  $.post("/api/posts/add", newPost).then(function(data) {
-    console.log(data);
-  });
-});

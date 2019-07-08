@@ -118,7 +118,8 @@
                             <div class="userBox card">
                                 <div class="card-content">
                                     <div class="row">
-                                        <i id="userBoxPic" class="center-align material-icons prefix" style="top:0px!important;">
+                                        <i id="userBoxPic" class="center-align material-icons prefix"
+                                            style="top:0px!important;">
                                             <img class="center-align" style="height:45px; width:45px;"
                                                 src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
                                         </i>
@@ -129,10 +130,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="card-action userInfo Bar">
-                                        Posts: "0" <br>
-                                        Comments: "0" <br>
-                                        Fire: "0" <br>
-                                        Trash: "0" <br>
+                                       <p>Posts: "0"</p><br>
+                                       <p>Comments: "0"</p><br>
+                                       <p>Fire: "0"</p><br>
+                                       <p>Trash: "0"</p><br>
                                     </div>
                                 </div>
                             </div>
@@ -145,21 +146,23 @@
 </div>
 <script src="/js/index.js"></script>
 <script>
+   $(document).ready(function() {
+  // This file just does a GET request to figure out which user is logged in
+  // and updates the HTML on the page
+  $.get("/api/user_data").then(function(data) {
+    $("#userBoxName").text(data.userName);
+    console.log("data from backend ",data);
+  });
+});
+
     var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
     });
-
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.tooltipped');
         var instances = M.Tooltip.init(elems, { margin: 0 });
         var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
         // tooltip.open();
     });
-
-    var titanic = new Titanic({
-        hover: true, // auto animated on hover (default true)
-        click: true  // auto animated on click/tap (default false)
-    });
-
 </script>
