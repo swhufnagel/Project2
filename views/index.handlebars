@@ -211,7 +211,7 @@
         $.get("/api/user_data").then(function (data) {
             $("#userBoxName").text(data.userName);
             localStorage.setItem("userId", data.id);
-            localStorage.setItem("userImg", data.JSON(userImg));
+            localStorage.setItem("userImg", data.userImg);
             console.log("data from backend ", data);
         });
     });
