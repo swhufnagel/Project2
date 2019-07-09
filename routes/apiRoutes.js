@@ -7,7 +7,6 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
   app.get("/api/post/", function(req, res) {
-
     // console.log("post request ",req);
     db.postTable
       .findAll({

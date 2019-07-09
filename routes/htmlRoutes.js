@@ -6,26 +6,22 @@ module.exports = function(app) {
   // Load index page
   app.get("/", isAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
-      res.render("index", {
-        account: dbAccount
-      });
+      db.postTable
+        .findAll({
+          limit: 10,
+          order: [["postId", "DESC"]]
+        })
+        .then(function(dbPosts) {
+          res.render("index", {
+            account: dbAccount,
+            post: dbPosts
+          });
+        });
     });
   });
 
   app.get("/home", isNotAuthenticated, function(req, res) {
-    db.userLogin.findAll({}).then(function(dbAccount) {
-      db.postTable.findAll({
-        limit: 5,
-        order: [
-          ["postId", "DESC"]
-        ]
-      }).then(function(data) {
-        console.log(data);
-        res.render("home", { account: data });
-      });
-
-      // console.log(dbAccount);
-    });
+    res.render("home");
   });
 
   // Load example page and pass in an example by id
