@@ -25,28 +25,25 @@ var API = {
     });
   },
 
-
   getAccount: function(email, password) {
     $.post("/api/login", {
       email: email,
       password: password
     })
       .then(function() {
-        window.location.replace("/home");
+        window.location.replace("/");
         // If there's an error, log the error
       })
       .catch(function(err) {
         console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
-
   },
   deleteAccount: function(id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
     });
-
   },
   createPost: function(postBody) {
     return $.ajax({
@@ -60,15 +57,15 @@ var API = {
   }
 };
 
-$("#homeButt").on("click",function() {
+$("#homeButt").on("click", function() {
   event.preventDefault();
   console.log("home");
   //if a user is not logged in the home button will bring them to login screen and if they are logged in
   //it will bring them to the home screen
-  var loggedIn =false;
-  if(loggedIn === false ){
+  var loggedIn = false;
+  if (loggedIn === false) {
     window.location.href = "/";
-  } else{
+  } else {
     window.location.href = "/home";
   }
 });
@@ -114,7 +111,6 @@ var registerFormSubmit = function(event) {
   $passwordRepeat.val("");
 };
 
-
 // Add Event Listener to Create an Account
 $("#registerAccountSubmit").on("click", registerFormSubmit);
 
@@ -130,9 +126,9 @@ $loginSubmitBtn.on("click", function() {
   API.getAccount(email, password);
 });
 // Make a new Post
-var newPostDOM = function(postText){
+var newPostDOM = function(postText) {
   console.log("adding this ", postText);
-  var newPost = $("<div>", {id: "newPost2", class: "post"});
+  var newPost = $("<div>", { id: "newPost2", class: "post" });
   $(newPost).append($("#testPost").html());
   $("#postText").text(postText);
   $("#postContainer").append(newPost);
@@ -140,15 +136,17 @@ var newPostDOM = function(postText){
 $(document).on("click", "#newPostSubmit", function() {
   event.preventDefault();
 
-  var postText = $("#postTextBox").val().trim();
+  var postText = $("#postTextBox")
+    .val()
+    .trim();
 
   event.preventDefault();
   var newPost = {
     text: postText,
     // eslint-disable-next-line no-multi-spaces
-    image: "userImg",   // This still needs to be linked from login
+    image: "userImg", // This still needs to be linked from login
     likes: 0,
-    dislikes: 0,
+    dislikes: 0
     // userLoginUserId: 0     // This also needs to be linked from login
   };
   console.log(newPost);

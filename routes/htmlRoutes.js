@@ -1,9 +1,10 @@
-var db = require("../models");
-var isAuthenticated = require("../config/middleware/isAuthenticated");
+const db = require("../models");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
+  app.get("/", isAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
       res.render("index", {
         account: dbAccount
@@ -11,7 +12,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/home", isAuthenticated, function(req, res) {
+  app.get("/home", isNotAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
       res.render("home", {
         account: dbAccount
@@ -20,7 +21,7 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/account/:id", function(req, res) {
+  app.get("/account/:id", isAuthenticated, function(req, res) {
     db.userLogin
       .findOne({ where: { id: req.params.id } })
       .then(function(dbAccount) {
@@ -28,6 +29,12 @@ module.exports = function(app) {
           account: dbAccount
         });
       });
+  });
+
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
   });
 
   // Render 404 page for any unmatched routes
