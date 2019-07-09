@@ -5,7 +5,7 @@ var $regUserName = $("#regUserName");
 var $regEmail = $("#regEmail");
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
-var $userImg = $("#userImg");
+// var $userImg = $("#userImg");
 
 // User Login fields
 var $email = $("#email");
@@ -75,6 +75,39 @@ var API = {
     });
   }
 };
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~userImg Selection~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var userImg;
+// Button Options
+$("#imgBtnOne").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgOne.jpg";
+});
+
+$("#imgBtnTwo").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgTwo.jpg";
+});
+
+$("#imgBtnThree").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgThree.jpg";
+});
+
+$("#imgBtnFour").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgFour.jpg";
+});
+
+$("#imgBtnFive").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgFive.jpg";
+});
+
+$("#imgBtnSix").on("click", function() {
+  event.preventDefault();
+  userImg = "/images/userImgSix.jpg";
+});
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Register Account Button Process~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var registerFormSubmit = function(event) {
@@ -84,7 +117,7 @@ var registerFormSubmit = function(event) {
     firstName: $firstName.val().trim(),
     lastName: $lastName.val().trim(),
     userName: $regUserName.val().trim(),
-    userImg: $userImg.val().trim(),
+    userImg: userImg,
     email: $regEmail.val().trim(),
     password: $regPassword.val().trim()
   };
@@ -150,7 +183,7 @@ $(document).on("click", "#newPostSubmit", function() {
   var newPost = {
     text: postText,
     hashtags: hashTags,
-    image: "userImg", // This still needs to be linked from login
+    image: localStorage.getItem("userImg"), // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
     userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login

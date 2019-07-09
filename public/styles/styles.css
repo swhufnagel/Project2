@@ -27,6 +27,9 @@
 #textarea1{
   background-color: white;
 }
+#postTextBox{
+  background-color: white;
+}
 .commentText{
   display:inline-block;
   background-color: rgba(105, 27, 154, 0.699);

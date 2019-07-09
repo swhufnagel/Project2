@@ -5,7 +5,12 @@ const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
 module.exports = function (app) {
   // Load index page
   app.get("/", isAuthenticated, function (req, res) {
-    db.userLogin.findAll({}).then(function (dbAccount) {
+    // console.log("RES::", res);
+    db.userLogin.findOne({
+      where: {
+        userId: req.user.userId
+      }
+    }).then(function (dbAccount) {
       db.postTable
         .findAll({
           limit: 10,
@@ -17,6 +22,7 @@ module.exports = function (app) {
             post: dbPosts
           });
         });
+      // console.log("dbAccount::", dbAccount);
     });
   });
 
