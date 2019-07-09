@@ -56,6 +56,20 @@
 .postBox{
   padding: 24px 12px 9px 12px !important;
 }
+input[type=text]:not(.browser-default):focus:not([readonly]){
+  border-bottom: solid 1px purple !important;
+}
+#searchBar{
+  width: 25%;
+  margin-left: 5%;
+  background-color: rgba(105, 27, 154, 0.699);
+  color: white;
+  border-radius: 20px;
+  padding: 4px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: rgba(152, 98, 185, 0.555);
+}
 #commentIcon{
   margin-left:auto;
   margin-right:auto;
