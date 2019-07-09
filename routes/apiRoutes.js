@@ -55,14 +55,18 @@ module.exports = function(app) {
 
   //Gets posts with a certain hashtag
   app.get("/api/post/:hashtag", function(req, res) {
-    db.postTable.findAll({
-      limit: 10,
-      where: {
-        hashtags: {
-          [Sequelize.Op.like]: "%" + req.params.hashtag + "%"
+    db.postTable
+      .findAll({
+        limit: 10,
+        where: {
+          hashtags: {
+            [Sequelize.Op.like]: "%" + req.params.hashtag + "%"
+          }
         }
-      }
-    });
+      })
+      .then(function(data) {
+        res.json(data);
+      });
   });
 
   //THESE BELOW NEED TO BE UPDATED
