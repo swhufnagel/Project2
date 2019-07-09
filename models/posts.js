@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BLOB,
       allowNull: true
     },
+    hashtags: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
     // likes: {
     //   type: DataTypes.INTEGER,
     //   defaultValue: "0"
@@ -30,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     // }
   });
 
-  postTable.asociate = function(models){
+  postTable.asociate = function(models) {
     postTable.belongsTo(models.userLogin, {
       foreignKey: {
         allowNull: false
