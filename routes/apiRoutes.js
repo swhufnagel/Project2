@@ -1,10 +1,13 @@
 var db = require("../models");
 var passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
 
 module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
   app.get("/api/post/", function(req, res) {
+
     // console.log("post request ",req);
     db.postTable
       .findAll({
@@ -55,42 +58,62 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CREATE NEW ACCOUNT/POST/COMMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Create a new account/Post/Comment
   app.post("/api/account/add", function(req, res) {
-    // console.log(req.body);
     db.userLogin
-      .create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userName: req.body.userName,
-        email: req.body.email,
-        password: req.body.password
+      .findOne({
+        where: {
+          email: req.body.email
+        }
       })
-      .then(function() {
-        res.redirect(307, "/api/login");
-      })
-      .catch(function(err) {
-        console.log("What????");
-        res.status(401).json(err);
+      .then(function(dbData) {
+        // If there's no user with the given email
+        if (dbData) {
+          console.log(`E-Mail Address already in use: ${req.body.email}`);
+          res.status(409).json({
+            message: "Email Address is already in use! Please try to login."
+          });
+        } else {
+          db.userLogin
+            .findOne({
+              where: {
+                userName: req.body.userName
+              }
+            })
+            .then(function(dbData) {
+              // If there's no user with the given email
+              if (dbData) {
+                console.log(`Username already in use: ${req.body.userName}`);
+                res.status(409).json({
+                  message:
+                    "Username is already taken! Please select a new username."
+                });
+              } else {
+                db.userLogin
+                  .create({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    userName: req.body.userName,
+                    email: req.body.email,
+                    password: req.body.password
+                  })
+                  .then(function() {
+                    res.redirect(307, "/api/login");
+                  })
+                  .catch(function(err) {
+                    console.log("Bad Login");
+                    res.status(401).json(err);
+                  });
+              }
+            });
+        }
       });
   });
 
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    console.log("api post success!");
+    console.log("A sucessful login has been made!");
     res.json(req.user);
     // res.redirect("/home");
   });
-  // Route for logging user out
-  app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
-  });
-  function ensureAuthenticated (req, res, next) {
-    if (req.isAuthenticated()) {
-      console.log("authenticated and going home");
-      res.redirect("/home");
-      return next;
-    }
-    res.redirect("/");
-  }
+
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
@@ -107,29 +130,16 @@ module.exports = function(app) {
       });
     }
   });
-  // app.get("/api/user_data", ensureAuthenticated, function(req, res) {
-  //   if (!req.user) {
-  //     // The user is not logged in, send back an empty object
-  //     console.log("Please login to continue");
-  //     console.alert("Please login to continue");
-  //     res.json({});
-  //   } else {
-  //     // Otherwise send back the user's email and id
-  //     // Sending back a password, even a hashed password, isn't a good idea
-  //     sendToFront();
-  //   }
-  // });
 
-  //Create posts need a way to link to user.
-
-  app.post("/api/post/add", function(req, res) {
+  app.post("/api/post/add", isAuthenticated, function(req, res) {
     console.log("new post req", req.body);
-    // console.log("res:", res);
     db.postTable
       .create({
+        userLoginUserId: req.user.userID,
         text: req.body.text,
         image: "",
         likes: 0,
+
         dislikes: 0,
         userLoginUserId: parseInt(req.body.userLoginUserId)
       })

@@ -1,48 +1,53 @@
 <div id="home">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
         <div class="row">
-            <div class="col-3 hide-on-med-and-down">
+          <div class="col s12 m6">
+            <div id="loginCard" class="card">
+              <div class="card-content white-text purple darken-3">
+                <span class="card-title">Login</span>
+              </div>
+              <div class="card-action white">
                 <div class="row">
-                    <div class="col-12">
-                        <img id="leftLogo" src="/images/leftLogo.png" class="focus-in-expand-fwd">
+                  <form action="POST" class="col s12">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input id="email" type="text" class="validate">
+                        <label for="email">Email</label>
+                      </div>
                     </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                    <button id="loginButton" class="right btn waves-effect waves-light purple darken-3">Login
+                      <i class="material-icons right">send</i>
+                    </button>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col s12 m6">
-                        <div class="card white">
-                            <div style="padding:2px;" class="card-header purple darken-3 white-text margin-left-3">
-                                <form>
-                                    <div class="input-field col s12">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img style="height:50px; width:50px;display:inline-block"
-                                                    src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
-                                            </div>
-                                            <div class="col-10">
-                                                <textarea style="display:inline-block" id="postTextBox"
-                                                    class="materialize-textarea" data-length="140"
-                                                    placeholder="  Start an argument here!"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <a class="waves-effect waves-light btn-small orange lighten-2 left"><i
-                                                        class="material-icons">photo</i></a>
-                                            </div>
-                                            <div class="col-6">
-
-                                                <button class="btn waves-effect waves-light orange lighten-2 right"
-                                                    id="newPostSubmit" name="action">Post
-                                                    <i class="material-icons right">send</i>
-                                            </div>
-                                        </div>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                <div class="fixed-action-btn bottom left">
+                  <a id="openRegister"
+                    class="btn-floating btn-large waves-effect waves-light purple lighten-3 modal-trigger"
+                    href="#modal1">
+                    <i class="large material-icons">add</i>
+                  </a>
+                </div>
+                <div id="modal1" class="modal">
+                  <div class="modal-content white">
+                    <div class="modal-header">
+                      <h4>Register</h4>
+                    </div>
+                    <form action="POST" class="col s12">
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="firstName" type="text" class="validate">
+                          <label for="firstName">First Name</label>
                         </div>
+
                         <div id="postContainer">
 
                             {{#each account}}
@@ -168,41 +173,55 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 hide-on-med-and-down">
-                <div class="row">
-                    <div class="col-12">
-                        <div id="userInfo">
-                            <div class="userBox card">
-                                <div class="card-content">
-                                    <div class="row">
-                                        <i id="userBoxPic" class="center-align material-icons prefix"
-                                            style="top:0px!important;">
-                                            <img class="center-align" style="height:45px; width:45px;"
-                                                src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
-                                        </i>
-                                    </div>
-                                    <div class="row">
-                                        <p id="userBoxName" class="center-align">UserName</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="card-action userInfo Bar">
-                                        <p>Posts: "0"</p><br>
-                                        <p>Comments: "0"</p><br>
-                                        <p>Fire: "0"</p><br>
-                                        <p>Trash: "0"</p><br>
-                                    </div>
-                                </div>
-                            </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="regUserName" type="text" class="validate">
+                          <label for="regUserName">User Name</label>
                         </div>
-                    </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="regEmail" type="text" class="validate">
+                          <label for="regEmail">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="regPassword" type="password" class="validate">
+                          <label for="regPassword">Password</label>
+                        </div>
+                        <div class="input-field col s6">
+                          <input id="repeatPassword" type="password" class="validate">
+                          <label for="repeatPassword">Confirm Password</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="file-field input-field col s12">
+                          <div class="file-path-wrapper">
+                            <i class="material-icons prefix">save</i>
+                            <input type="file">
+                            <input id="userImg" placeholder="Upload a User Photo" class="file-path validate"
+                              type="text">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <a id="registerAccountSubmit"
+                      class="modal-close waves-effect waves-green btn purple darken-3">Create New
+                      Account!</a>
+                  </div>
                 </div>
+              </div>
             </div>
+            <p id="underLoginText" class="modal-trigger" href="#modal1">Click here to register for a new page!</p>
+          </div>
         </div>
+      </div>
     </div>
+
 </div>
 <script src="/js/index.js"></script>
 <script>
@@ -218,14 +237,14 @@
         });
     });
 
-    var titanic = new Titanic({
+    <script src="/js/index.js"></script>
+    <script>
+      var titanic = new Titanic({
         hover: true, // auto animated on hover (default true)
         click: true  // auto animated on click/tap (default false)
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.tooltipped');
-        var instances = M.Tooltip.init(elems, { margin: 0 });
-        var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
-        // tooltip.open();
-    });
-</script>
+      });
+
+      $(document).ready(function () {
+        $('.modal').modal();
+      });
+    </script>

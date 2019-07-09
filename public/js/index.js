@@ -1,15 +1,18 @@
-// Get references to page elements
+// Create Account Fields
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
 var $regUserName = $("#regUserName");
-
 var $regEmail = $("#regEmail");
-
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 var $userImg = $("#userImg");
+
+// User Login fields
+var $email = $("#email");
+var $password = $("#password");
+
 // eslint-disable-next-line no-unused-vars
-var $regSubmitBtn = $("#registerSubmit");
+var $regSubmitBtn = $("#registerAccountSubmit");
 var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
@@ -26,27 +29,28 @@ var API = {
   },
 
 
-  getAccount: function (email, password) {
+  getAccount: function(account) {
+
     $.post("/api/login", {
-      email: email,
-      password: password
+      email: account.email,
+      password: account.password
     })
-      .then(function () {
-        window.location.replace("/home");
+
+      .then(function() {
+        window.location.replace("/");
+
         // If there's an error, log the error
       })
       .catch(function (err) {
         console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
-
   },
   deleteAccount: function (id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
     });
-
   },
   createPost: function (postBody) {
     return $.ajax({
@@ -60,21 +64,10 @@ var API = {
   }
 };
 
-$("#homeButt").on("click", function () {
-  event.preventDefault();
-  console.log("home");
-  //if a user is not logged in the home button will bring them to login screen and if they are logged in
-  //it will bring them to the home screen
-  var loggedIn = false;
-  if (loggedIn === false) {
-    window.location.href = "/";
-  } else {
-    window.location.href = "/home";
-  }
-});
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var registerFormSubmit = function (event) {
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Register Account Button Process~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var registerFormSubmit = function(event) {
+
   event.preventDefault();
 
   var account = {
@@ -101,55 +94,58 @@ var registerFormSubmit = function (event) {
     console.log(account);
   }
 
-  API.createAccount(account).then(function (data) {
+
+  API.createAccount(account).then(function() {
+    $firstName.val("");
+    $lastName.val("");
+    $regUserName.val("");
+    $regEmail.val("");
+    $regPassword.val("");
+    $passwordRepeat.val("");
     console.table(account);
-    console.log(data)
-    // refreshAccount();
+
   });
-
-  $firstName.val("");
-  $lastName.val("");
-  $regUserName.val("");
-  $regEmail.val("");
-  $regPassword.val("");
-  $passwordRepeat.val("");
 };
 
-
-// Add Event Listener to Create an Account
-$("#registerAccountSubmit").on("click", registerFormSubmit);
-
-// Add Event Listener to Login
-$loginSubmitBtn.on("click", function () {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Login to your account button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var loginAccount = function(event) {
   event.preventDefault();
-  var email = $("#email")
-    .val()
-    .trim();
-  var password = $("#password")
-    .val()
-    .trim();
-  API.getAccount(email, password);
-});
-// Make a new Post
-var newPostDOM = function (postText) {
-  console.log("adding this ", postText);
-  var newPost = $("<div>", { id: postId, class: "post" });
-  $(newPost).append($("#testPost").html());
-  $("#postText").text(postText);
-  $("#postContainer").append(newPost);
+
+  var account = {
+    email: $email.val().trim(),
+    password: $password.val().trim()
+  };
+
+
+  if (!(account.email && account.password)) {
+    alert("You must enter your account information!");
+    return;
+  }
+
+  API.getAccount(account).then(function() {
+    $email.val("");
+    $password.val("");
+    console.table(account);
+  });
 };
 
-$(document).on("click", "#newPostSubmit", function () {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ New Post Submit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$(document).on("click", "#newPostSubmit", function() {
+
   event.preventDefault();
 
-  var postText = $("#postTextBox").val().trim();
+  var postText = $("#postTextBox")
+    .val()
+    .trim();
 
   var newPost = {
     text: postText,
+
     image: "userImg", // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
     userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login
+
   };
   console.log("NEW post:", newPost);
   // $.post("/api/post/add", newPost).then(function (data) {
@@ -175,9 +171,9 @@ $(document).on("click", "#newPostSubmit", function () {
   $("#postTextBox").val("");
 });
 
-$(document).ready(function() {
-  $.get("/api/post").then(function(data) {
-    console.log("text:", data);
+// Add Event Listener to Create an Account
+$regSubmitBtn.on("click", registerFormSubmit);
 
-  });
-});
+// Add Event Listener to Login
+$loginSubmitBtn.on("click", loginAccount);
+

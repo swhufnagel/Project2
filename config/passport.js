@@ -19,17 +19,17 @@ passport.use(
           }
         })
         .then(function(dbUser) {
-          // console.log(dbUser.dataValues.userName);
+
           // If there's no user with the given email
           if (!dbUser) {
-            console.log("this is incorrect email");
+            console.log(`An incorrect email address was attempted: ${email}`);
             return done(null, false, {
-              message: "Incorrect email."
+              message: "Invalid login, please try again!"
             });
           } else if (!dbUser.validPassword(password)) {
-            console.log("incorrect password area");
+            console.log("An incorrect password was attempted");
             return done(null, false, {
-              message: "Incorrect password."
+              message: "Invalid login, please try again!"
             });
           }
           // If none of the above, return the user
