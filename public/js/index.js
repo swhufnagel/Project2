@@ -138,27 +138,46 @@ var newPostDOM = function (postText) {
   $("#postText").text(postText);
   $("#postContainer").append(newPost);
 };
+
 $(document).on("click", "#newPostSubmit", function () {
   event.preventDefault();
 
   var postText = $("#postTextBox").val().trim();
 
-  event.preventDefault();
   var newPost = {
     text: postText,
-    // eslint-disable-next-line no-multi-spaces
-    image: "userImg",   // This still needs to be linked from login
+    image: "userImg", // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
-    userLoginUserId: parseInt(localStorage.getItem("userId"))     // This also needs to be linked from login
+    userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login
   };
-  console.log(newPost);
-  $.post("/api/post/add", newPost).then(function (data) {
+  console.log("NEW post:", newPost);
+  // $.post("/api/post/add", newPost).then(function (data) {
+  //   console.log("submitted data:", data);
+  //   var postId = data.postId;
+  //   console.log(postId);
+  //   location.reload();
+  // });
+
+  $.ajax({
+    type: "POST",
+    url: "/api/post/add",
+    data: newPost
+  }).then(function(data) {
     console.log("submitted data:", data);
     var postId = data.postId;
     console.log(postId);
+    location.reload();
   });
+
   // newPostDOM(postText);
   // Clear form data
   $("#postTextBox").val("");
+});
+
+$(document).ready(function() {
+  $.get("/api/post").then(function(data) {
+    console.log("text:", data);
+
+  });
 });

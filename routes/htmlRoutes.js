@@ -13,9 +13,17 @@ module.exports = function(app) {
 
   app.get("/home", isAuthenticated, function(req, res) {
     db.userLogin.findAll({}).then(function(dbAccount) {
-      console.log(dbAccount);
-      res.render("home", { account: dbAccount });
-      
+      db.postTable.findAll({
+        limit: 5,
+        order: [
+          ["postId", "DESC"]
+        ]
+      }).then(function(data) {
+        console.log(data);
+        res.render("home", { account: data });
+      });
+
+      // console.log(dbAccount);
     });
   });
 
