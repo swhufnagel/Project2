@@ -84,7 +84,7 @@ var registerFormSubmit = function(event) {
     firstName: $firstName.val().trim(),
     lastName: $lastName.val().trim(),
     userName: $regUserName.val().trim(),
-    userImg: $userImg.val().trim(),
+    // userImg: $userImg.val().trim(),
     email: $regEmail.val().trim(),
     password: $regPassword.val().trim()
   };
@@ -150,7 +150,7 @@ $(document).on("click", "#newPostSubmit", function() {
   var newPost = {
     text: postText,
     hashtags: hashTags,
-    image: "userImg", // This still needs to be linked from login
+    image: localStorage.getItem("userImg"), // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
     userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login
