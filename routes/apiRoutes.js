@@ -157,7 +157,7 @@ module.exports = function(app) {
         text: req.body.text,
         likes: 0,
         dislikes: 0,
-        userLoginuserId: req.body.userId, //send help
+        userLoginUserId: req.body.userId, // for future implementation
         postTablepostId: req.body.postId
       })
       .then(function(dbComment) {
