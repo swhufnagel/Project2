@@ -139,12 +139,6 @@ $(document).on("click", "#newPostSubmit", function() {
     userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login
   };
   console.log("NEW post:", newPost);
-  // $.post("/api/post/add", newPost).then(function (data) {
-  //   console.log("submitted data:", data);
-  //   var postId = data.postId;
-  //   console.log(postId);
-  //   location.reload();
-  // });
 
   $.ajax({
     type: "POST",
