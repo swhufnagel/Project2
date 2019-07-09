@@ -1,16 +1,19 @@
+/* #commentSend {
 
-#commentSend{
-
+} */
+span {
+  width: 100%;
 }
-span{
-width:100%;
-}
-.card{
-  margin-top: 15%!important;
-
+.card {
+  margin-top: 15% !important;
   border: white solid 0px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 8px -4px,
     rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px !important;
+}
+.container-fluid {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: 88vw;
 }
 #leftLogo {
   position: relative;
@@ -52,10 +55,10 @@ width:100%;
   margin-left: 15% !important;
 }
 
-.commentTextBox{
-  margin-left:10%;
-  margin-right:auto;
-  width:78%;
+.commentTextBox {
+  margin-left: 10%;
+  margin-right: auto;
+  width: 78%;
 
   background-color: white;
   margin-top: 6px !important;
@@ -67,10 +70,10 @@ width:100%;
   padding: 24px 12px 9px 12px !important;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]){
+input[type="text"]:not(.browser-default):focus:not([readonly]) {
   border-bottom: solid 1px purple !important;
 }
-#searchBar{
+#searchBar {
   width: 25%;
   margin-left: 5%;
   background-color: rgba(105, 27, 154, 0.699);
@@ -81,19 +84,18 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
   margin-bottom: 5px;
   background-color: rgba(152, 98, 185, 0.555);
 }
-#commentIcon{
-  margin-left:auto;
-  margin-right:auto;
+#commentIcon {
+  margin-left: auto;
+  margin-right: auto;
 }
-.commentBar{
-  height:35px;
-  width:96%;
-  margin-left:auto;
-  margin-right:auto;
-  margin-bottom:2px !important; 
-  border-bottom: 1px solid rgba(160,160,160,0.2)!important; 
-  padding: 5px 12px 10px 12px!important
-
+.commentBar {
+  height: 35px;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2px !important;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2) !important;
+  padding: 5px 12px 10px 12px !important;
 }
 #underLoginText {
   text-align: center;
