@@ -1,15 +1,18 @@
-// Get references to page elements
+// Create Account Fields
 var $firstName = $("#firstName");
 var $lastName = $("#lastName");
 var $regUserName = $("#regUserName");
-
 var $regEmail = $("#regEmail");
-
 var $regPassword = $("#regPassword");
 var $passwordRepeat = $("#regPassword-repeat");
 var $userImg = $("#userImg");
+
+// User Login fields
+var $email = $("#email");
+var $password = $("#password");
+
 // eslint-disable-next-line no-unused-vars
-var $regSubmitBtn = $("#registerSubmit");
+var $regSubmitBtn = $("#registerAccountSubmit");
 var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
@@ -25,10 +28,10 @@ var API = {
     });
   },
 
-  getAccount: function(email, password) {
+  getAccount: function(account) {
     $.post("/api/login", {
-      email: email,
-      password: password
+      email: account.email,
+      password: account.password
     })
       .then(function() {
         window.location.replace("/");
@@ -57,20 +60,7 @@ var API = {
   }
 };
 
-$("#homeButt").on("click", function() {
-  event.preventDefault();
-  console.log("home");
-  //if a user is not logged in the home button will bring them to login screen and if they are logged in
-  //it will bring them to the home screen
-  var loggedIn = false;
-  if (loggedIn === false) {
-    window.location.href = "/";
-  } else {
-    window.location.href = "/home";
-  }
-});
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Register Account Button Process~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var registerFormSubmit = function(event) {
   event.preventDefault();
 
@@ -99,40 +89,38 @@ var registerFormSubmit = function(event) {
   }
 
   API.createAccount(account).then(function() {
+    $firstName.val("");
+    $lastName.val("");
+    $regUserName.val("");
+    $regEmail.val("");
+    $regPassword.val("");
+    $passwordRepeat.val("");
     console.table(account);
-    // refreshAccount();
   });
-
-  $firstName.val("");
-  $lastName.val("");
-  $regUserName.val("");
-  $regEmail.val("");
-  $regPassword.val("");
-  $passwordRepeat.val("");
 };
 
-// Add Event Listener to Create an Account
-$("#registerAccountSubmit").on("click", registerFormSubmit);
-
-// Add Event Listener to Login
-$loginSubmitBtn.on("click", function() {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Login to your account button~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var loginAccount = function(event) {
   event.preventDefault();
-  var email = $("#email")
-    .val()
-    .trim();
-  var password = $("#password")
-    .val()
-    .trim();
-  API.getAccount(email, password);
-});
-// Make a new Post
-var newPostDOM = function(postText) {
-  console.log("adding this ", postText);
-  var newPost = $("<div>", { id: "newPost2", class: "post" });
-  $(newPost).append($("#testPost").html());
-  $("#postText").text(postText);
-  $("#postContainer").append(newPost);
+
+  var account = {
+    email: $email.val().trim(),
+    password: $password.val().trim()
+  };
+
+  if (!(account.email && account.password)) {
+    alert("You must enter your account information!");
+    return;
+  }
+
+  API.getAccount(account).then(function() {
+    $email.val("");
+    $password.val("");
+    console.table(account);
+  });
 };
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ New Post Submit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $(document).on("click", "#newPostSubmit", function() {
   event.preventDefault();
 
@@ -158,3 +146,9 @@ $(document).on("click", "#newPostSubmit", function() {
   // Clear form data
   $("#postTextBox").val("");
 });
+
+// Add Event Listener to Create an Account
+$regSubmitBtn.on("click", registerFormSubmit);
+
+// Add Event Listener to Login
+$loginSubmitBtn.on("click", loginAccount);

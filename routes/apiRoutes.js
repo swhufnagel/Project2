@@ -1,5 +1,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
 
 module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,32 +129,18 @@ module.exports = function(app) {
       });
     }
   });
-  // app.get("/api/user_data", ensureAuthenticated, function(req, res) {
-  //   if (!req.user) {
-  //     // The user is not logged in, send back an empty object
-  //     console.log("Please login to continue");
-  //     console.alert("Please login to continue");
-  //     res.json({});
-  //   } else {
-  //     // Otherwise send back the user's email and id
-  //     // Sending back a password, even a hashed password, isn't a good idea
-  //     sendToFront();
-  //   }
-  // });
 
-  //Create posts need a way to link to user.
-
-  app.post("/api/post/add", function(req, res) {
+  app.post("/api/post/add", isAuthenticated, function(req, res) {
     console.log("new post req", req.body);
-    // console.log("res:", res);
     db.postTable
       .create({
+        userLoginUserId: req.user.userID,
         text: req.body.text,
         image: "",
         likes: 0,
         dislikes: 0
       })
-      .then(function(res) {
+      .then(function() {
         // res.status(status);
         console.log("new post added");
       });
