@@ -138,7 +138,7 @@ module.exports = function(app) {
         text: req.body.text,
         image: "",
         likes: 0,
-
+        hashtags: req.body.hashtags,
         dislikes: 0,
         userLoginUserId: parseInt(req.body.userLoginUserId)
       })
