@@ -17,7 +17,7 @@ var $loginSubmitBtn = $("#loginButton");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  createAccount: function (account) {
+  createAccount: function(account) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -28,9 +28,7 @@ var API = {
     });
   },
 
-
   getAccount: function(account) {
-
     $.post("/api/login", {
       email: account.email,
       password: account.password
@@ -41,18 +39,18 @@ var API = {
 
         // If there's an error, log the error
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.alert("Invalid Email/Password Combination!");
         console.log(err);
       });
   },
-  deleteAccount: function (id) {
+  deleteAccount: function(id) {
     return $.ajax({
       url: "api/account/" + id,
       type: "DELETE"
     });
   },
-  createPost: function (postBody) {
+  createPost: function(postBody) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -64,10 +62,8 @@ var API = {
   }
 };
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Register Account Button Process~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var registerFormSubmit = function(event) {
-
   event.preventDefault();
 
   var account = {
@@ -94,7 +90,6 @@ var registerFormSubmit = function(event) {
     console.log(account);
   }
 
-
   API.createAccount(account).then(function() {
     $firstName.val("");
     $lastName.val("");
@@ -103,7 +98,6 @@ var registerFormSubmit = function(event) {
     $regPassword.val("");
     $passwordRepeat.val("");
     console.table(account);
-
   });
 };
 
@@ -115,7 +109,6 @@ var loginAccount = function(event) {
     email: $email.val().trim(),
     password: $password.val().trim()
   };
-
 
   if (!(account.email && account.password)) {
     alert("You must enter your account information!");
@@ -131,7 +124,6 @@ var loginAccount = function(event) {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ New Post Submit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $(document).on("click", "#newPostSubmit", function() {
-
   event.preventDefault();
 
   var postText = $("#postTextBox")
@@ -145,7 +137,6 @@ $(document).on("click", "#newPostSubmit", function() {
     likes: 0,
     dislikes: 0,
     userLoginUserId: parseInt(localStorage.getItem("userId")) // This also needs to be linked from login
-
   };
   console.log("NEW post:", newPost);
   // $.post("/api/post/add", newPost).then(function (data) {
@@ -176,4 +167,3 @@ $regSubmitBtn.on("click", registerFormSubmit);
 
 // Add Event Listener to Login
 $loginSubmitBtn.on("click", loginAccount);
-
