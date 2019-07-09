@@ -108,7 +108,6 @@ $("#imgBtnSix").on("click", function() {
   userImg = "/images/userImgSix.jpg";
 });
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Register Account Button Process~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var registerFormSubmit = function(event) {
   event.preventDefault();
@@ -145,6 +144,7 @@ var registerFormSubmit = function(event) {
     $regPassword.val("");
     $passwordRepeat.val("");
     console.table(account);
+    window.location.replace("/");
   });
 };
 
@@ -194,10 +194,7 @@ $(document).on("click", "#newPostSubmit", function() {
     type: "POST",
     url: "/api/post/add",
     data: newPost
-  }).then(function(data) {
-    console.log("submitted data:", data);
-    var postId = data.postId;
-    console.log(postId);
+  }).then(function() {
     location.reload();
   });
 
