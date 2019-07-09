@@ -165,7 +165,7 @@ $(document).on("click", "#newPostSubmit", function() {
     console.log("submitted data:", data);
     var postId = data.postId;
     console.log(postId);
-    //location.reload();
+    location.reload();
   });
 
   // newPostDOM(postText);
