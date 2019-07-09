@@ -21,8 +21,8 @@ module.exports = function (app) {
             account: dbAccount,
             post: dbPosts
           });
+          console.log("dbPosts::", dbPosts);
         });
-      // console.log("dbAccount::", dbAccount);
     });
   });
 

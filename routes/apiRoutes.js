@@ -137,7 +137,7 @@ module.exports = function(app) {
       .create({
         userLoginUserId: req.user.userID,
         text: req.body.text,
-        image: req.body.userImg,
+        image: req.body.image,
         likes: 0,
         hashtags: req.body.hashtags,
         dislikes: 0,
