@@ -19,10 +19,10 @@
                                         <div class="row">
                                             <div class="col-2">
                                                 <img style="height:50px; width:50px;display:inline-block"
-                                                    src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
+                                                    src="{{account.userImg}}">
                                             </div>
                                             <div class="col-10">
-                                                <textarea style="display:inline-block" id="postTextBox"
+                                                <textarea style="display:inline-block; padding:5px;" id="postTextBox"
                                                     class="materialize-textarea" data-length="140"
                                                     placeholder="  Start an argument here!"></textarea>
                                             </div>
@@ -210,7 +210,8 @@
         // and updates the HTML on the page
         $.get("/api/user_data").then(function (data) {
             $("#userBoxName").text(data.userName);
-            localStorage.setItem("userId", data.id)
+            localStorage.setItem("userId", data.id);
+            localStorage.setItem("userImg", data.userImg);
             console.log("data from backend ", data);
         });
     });
