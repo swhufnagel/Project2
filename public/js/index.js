@@ -173,6 +173,14 @@ $(document).on("click", "#newPostSubmit", function() {
   $("#postTextBox").val("");
 });
 
+$(".showComments").on("click", function(){
+
+  var clickedPost = $(this).find("div.commentRow");
+  console.log(clickedPost);
+  clickedPost.attr("style","display:block;");
+  // $(".commentRow").attr("style","display:block;");
+
+});
 // Add Event Listener to Create an Account
 $regSubmitBtn.on("click", registerFormSubmit);
 
