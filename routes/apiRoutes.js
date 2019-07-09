@@ -7,8 +7,9 @@ module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
   app.get("/api/post/", function(req, res) {
-    console.log("post request ", req);
-    postTable
+
+    // console.log("post request ",req);
+    db.postTable
       .findAll({
         limit: 10,
         where: {
@@ -138,10 +139,14 @@ module.exports = function(app) {
         text: req.body.text,
         image: "",
         likes: 0,
-        dislikes: 0
+
+        dislikes: 0,
+        userLoginUserId: parseInt(req.body.userLoginUserId)
       })
-      .then(function() {
+      .then(function(data) {
         // res.status(status);
+        console.log(data.postId);
+        res.json(data);
         console.log("new post added");
       });
   });

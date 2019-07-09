@@ -19,6 +19,7 @@ passport.use(
           }
         })
         .then(function(dbUser) {
+
           // If there's no user with the given email
           if (!dbUser) {
             console.log(`An incorrect email address was attempted: ${email}`);
