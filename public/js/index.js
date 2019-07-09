@@ -15,6 +15,20 @@ var $password = $("#password");
 var $regSubmitBtn = $("#registerAccountSubmit");
 var $loginSubmitBtn = $("#loginButton");
 
+//Hashtag grabber
+function getHashTags(inputText) {
+  inputText = inputText.toLowerCase();
+  var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+  var matches = [];
+  var match;
+
+  while ((match = regex.exec(inputText))) {
+    matches.push(match[1]);
+  }
+
+  return matches;
+}
+
 // The API object contains methods for each kind of request we'll make
 var API = {
   createAccount: function(account) {
@@ -130,9 +144,12 @@ $(document).on("click", "#newPostSubmit", function() {
     .val()
     .trim();
 
+  //Grab hashtags from post, sets them as a string to upload to database
+  var hashTags = JSON.stringify({ hashtags: getHashTags(postText) });
+  //console.log(hashTags);
   var newPost = {
     text: postText,
-
+    hashtags: hashTags,
     image: "userImg", // This still needs to be linked from login
     likes: 0,
     dislikes: 0,
@@ -148,7 +165,7 @@ $(document).on("click", "#newPostSubmit", function() {
     console.log("submitted data:", data);
     var postId = data.postId;
     console.log(postId);
-    location.reload();
+    //location.reload();
   });
 
   // newPostDOM(postText);
