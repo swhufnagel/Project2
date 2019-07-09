@@ -95,6 +95,7 @@ module.exports = function(app) {
                     password: req.body.password
                   })
                   .then(function() {
+                    console.log("redircting now!");
                     res.redirect(307, "/api/login");
                   })
                   .catch(function(err) {
@@ -110,7 +111,6 @@ module.exports = function(app) {
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     console.log("A sucessful login has been made!");
     res.json(req.user);
-    // res.redirect("/home");
   });
 
   app.get("/api/user_data", function(req, res) {
