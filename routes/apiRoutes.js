@@ -92,7 +92,8 @@ module.exports = function(app) {
                     lastName: req.body.lastName,
                     userName: req.body.userName,
                     email: req.body.email,
-                    password: req.body.password
+                    password: req.body.password,
+                    userImg: req.body.userImg
                   })
                   .then(function() {
                     console.log("redircting now!");
@@ -136,7 +137,7 @@ module.exports = function(app) {
       .create({
         userLoginUserId: req.user.userID,
         text: req.body.text,
-        image: "",
+        image: req.body.userImg,
         likes: 0,
         hashtags: req.body.hashtags,
         dislikes: 0,
