@@ -18,7 +18,7 @@
                                     <div class="input-field col s12">
                                         <div class="row">
                                             <div class="col-2">
-                                                <img style="height:50px; width:50px;display:inline-block"
+                                                <img style="height:50px; width:50px; border-radius:50%;display:inline-block"
                                                     src="{{account.userImg}}">
                                             </div>
                                             <div class="col-10">
@@ -51,8 +51,8 @@
                                         <div class="row">
                                             <div class="col-2">
                                                 <i class="material-icons prefix" style="top:0px!important;">
-                                                    <img style="height:45px; width:45px;"
-                                                        src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
+                                                    <img style="height:45px; width:45px; border-radius:50%;"
+                                                        src="{{this.image}}">
                                                 </i>
                                             </div>
                                             <div class="col-10">
@@ -176,22 +176,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 hide-on-med-and-down">
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="userInfo">
-                                <div class="userBox card">
-                                    <div class="card-content">
-                                        <div class="row">
-                                            <i id="userBoxPic" class="center-align material-icons prefix"
-                                                style="top:0px!important;">
-                                                <img class="center-align" style="height:45px; width:45px;"
-                                                    src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png">
-                                            </i>
-                                        </div>
-                                        <div class="row">
-                                            <p id="userBoxName" class="center-align">UserName</p>
-                                        </div>
+
+            </div>
+            <div class="col-3 hide-on-med-and-down">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="userInfo">
+                            <div class="userBox card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <i id="userBoxPic" class="center-align material-icons prefix"
+                                            style="top:0px!important;">
+                                            <img class="center-align" style="height:100px; width:100px; border-radius:50%;"
+                                                src="{{account.userImg}}">
+                                        </i>
                                     </div>
                                     <div class="row">
                                         <div class="card-action userInfo Bar">
@@ -231,4 +229,16 @@
             var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
             // tooltip.open();
         });
-    </script>
+
+    });
+    var titanic = new Titanic({
+        hover: true, // auto animated on hover (default true)
+        click: true  // auto animated on click/tap (default false)
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems, { margin: 0 });
+        var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
+        // tooltip.open();
+    });
+</script>

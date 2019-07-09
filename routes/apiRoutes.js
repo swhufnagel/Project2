@@ -2,7 +2,7 @@ var db = require("../models");
 var passport = require("../config/passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const isNotAuthenticated = require("../config/middleware/isNotAuthenticated");
-
+const Sequelize = require("sequelize");
 module.exports = function(app) {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETS RECENT POSTS / COMMENTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // Get most recent posts (based on limit)
@@ -24,7 +24,7 @@ module.exports = function(app) {
 
   // Get most recent posts (based on request (as either popularity all time or past days))
   app.get("/api/post/:pop/:time", function(req, res) {
-    postTable
+    db.postTable
       .findAll({
         limit: 10,
         where: {
@@ -41,12 +41,28 @@ module.exports = function(app) {
 
   //Gets comments on related posts
   app.get("/api/comments/:postId", function(req, res) {
-    comments
+    db.comments
       .findAll({
         where: {
           postTablepostId: req.params.postId //Needs to be the actual post id.,
         },
         order: [["createdAt", "DESC"]]
+      })
+      .then(function(data) {
+        res.json(data);
+      });
+  });
+
+  //Gets posts with a certain hashtag
+  app.get("/api/post/:hashtag", function(req, res) {
+    db.postTable
+      .findAll({
+        limit: 10,
+        where: {
+          hashtags: {
+            [Sequelize.Op.like]: "%" + req.params.hashtag + "%"
+          }
+        }
       })
       .then(function(data) {
         res.json(data);
@@ -92,7 +108,8 @@ module.exports = function(app) {
                     lastName: req.body.lastName,
                     userName: req.body.userName,
                     email: req.body.email,
-                    password: req.body.password
+                    password: req.body.password,
+                    userImg: req.body.userImg
                   })
                   .then(function() {
                     console.log("redircting now!");
@@ -136,7 +153,7 @@ module.exports = function(app) {
       .create({
         userLoginUserId: req.user.userID,
         text: req.body.text,
-        image: "",
+        image: req.body.image,
         likes: 0,
         hashtags: req.body.hashtags,
         dislikes: 0,
@@ -156,7 +173,7 @@ module.exports = function(app) {
         text: req.body.text,
         likes: 0,
         dislikes: 0,
-        userLoginuserId: req.body.userId, //send help
+        userLoginUserId: req.body.userId, // for future implementation
         postTablepostId: req.body.postId
       })
       .then(function(dbComment) {
@@ -211,6 +228,24 @@ module.exports = function(app) {
 
   app.put("/api/post/upd", function(req, res) {
     db.postTable
+      .update(
+        {
+          likes: req.body.likes,
+          dislikes: req.body.dislikes
+        },
+        {
+          where: {
+            id: req.body.id
+          }
+        }
+      )
+      .then(function(result) {
+        res.json(result);
+      });
+  });
+
+  app.put("/api/post/upd", function(req, res) {
+    db.userLogin
       .update(
         {
           likes: req.body.likes,
