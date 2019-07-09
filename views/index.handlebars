@@ -18,7 +18,7 @@
                                     <div class="input-field col s12">
                                         <div class="row">
                                             <div class="col-2">
-                                                <img style="height:50px; width:50px;display:inline-block"
+                                                <img style="height:50px; width:50px; border-radius:50%;display:inline-block"
                                                     src="{{account.userImg}}">
                                             </div>
                                             <div class="col-10">
@@ -51,7 +51,7 @@
                                         <div class="row">
                                             <div class="col-2">
                                                 <i class="material-icons prefix" style="top:0px!important;">
-                                                    <img style="height:45px; width:45px;"
+                                                    <img style="height:45px; width:45px; border-radius:50%;"
                                                         src="{{this.image}}">
                                                 </i>
                                             </div>
@@ -179,7 +179,7 @@
                                     <div class="row">
                                         <i id="userBoxPic" class="center-align material-icons prefix"
                                             style="top:0px!important;">
-                                            <img class="center-align" style="height:100px; width:100px;"
+                                            <img class="center-align" style="height:100px; width:100px; border-radius:50%;"
                                                 src="{{account.userImg}}">
                                         </i>
                                     </div>
@@ -211,7 +211,7 @@
         $.get("/api/user_data").then(function (data) {
             $("#userBoxName").text(data.userName);
             localStorage.setItem("userId", data.id);
-            localStorage.setItem("userImg", data.JSON(userImg));
+            localStorage.setItem("userImg", data.userImg);
             console.log("data from backend ", data);
         });
     });
