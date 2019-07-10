@@ -1,5 +1,5 @@
 # Postivism
-** Hosted App Link: ** https://www.postivism.herokuapp.com
+**Hosted App Link:** https://www.postivism.herokuapp.com
 
 ## Team Members
  - Sean Hufnagel
