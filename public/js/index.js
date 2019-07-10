@@ -73,6 +73,16 @@ var API = {
       type: "POST",
       data: JSON.stringify(postBody)
     });
+  },
+  searchTag: function(searchBody){
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/post/hash/:hashtag",
+      type: "GET",
+      data: JSON.stringify(searchBody)
+    });
   }
 };
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~userImg Selection~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
