@@ -65,8 +65,7 @@
                                     <div class="row">
                                         <i id="userBoxPic" class="center-align material-icons prefix"
                                             style="top:0px!important;">
-                                            <img class="center-align"
-                                                style="width:80%; border-radius:50%;"
+                                            <img class="center-align" style="width:80%; border-radius:50%;"
                                                 src="{{account.userImg}}">
                                         </i>
                                     </div>
@@ -90,18 +89,6 @@
                 console.log("data from backend ", data);
             });
         });
-        var titanic = new Titanic({
-            hover: true, // auto animated on hover (default true)
-            click: true  // auto animated on click/tap (default false)
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.tooltipped');
-            var instances = M.Tooltip.init(elems, { margin: 0 });
-            var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
-            // tooltip.open();
-        });
-
-    });
         var titanic = new Titanic({
             hover: true, // auto animated on hover (default true)
             click: true  // auto animated on click/tap (default false)
