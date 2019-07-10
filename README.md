@@ -8,7 +8,7 @@
  - Rich Walker
 
 ## Application Overview
-Postivism is a new take on Social Media where anyone can post whatever they want, completely anonymously. Personal attacks and censorship has become a major problem online. We wanted to give the people the chance to post what they have on their mind and ideas will be based on ** merit ** rather than popularity. Users are able to create an account, post what is on their mind anonymously, and also see what others have said around the world.
+Postivism is a new take on Social Media where anyone can post whatever they want, completely anonymously. Personal attacks and censorship has become a major problem online. We wanted to give the people the chance to post what they have on their mind and ideas will be based on **merit** rather than popularity. Users are able to create an account, post what is on their mind anonymously, and also see what others have said around the world.
 
 ## Technologies Used
  - Node.js
