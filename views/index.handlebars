@@ -1,0 +1,102 @@
+{{> header notHome=true}}
+<div id="home">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 hide-on-med-and-down">
+                <div class="row">
+                    <div class="col-12">
+                        <img id="leftLogo" src="/images/leftLogo.png" class="focus-in-expand-fwd"
+                            style="position: relative;width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <div class="row">
+                    <p>"...every rationally justifiable assertion can be
+                        scientifically verified or is capable of logical or mathematical proof, and that therefore
+                        rejects metaphysics and theism."</p>
+                </div>
+
+            </div>
+            <div class="col s12 m6">
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card white">
+                            <div style="padding:2px;" class="card-header purple darken-3 white-text margin-left-3">
+                                <form>
+                                    <div class="input-field col s12">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <img style="height:50px; width:50px; border-radius:50%;display:inline-block"
+                                                    src="{{account.userImg}}">
+                                            </div>
+                                            <div class="col-10">
+                                                <textarea style="display:inline-block; padding:5px;" id="postTextBox"
+                                                    class="materialize-textarea" data-length="140"
+                                                    placeholder="  Start an argument here!"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                            </div>
+                                            <div class="col-6">
+
+                                                <button class="btn waves-effect waves-light orange lighten-2 right"
+                                                    id="newPostSubmit" name="action">Post
+                                                    <i class="material-icons right">send</i>
+                                            </div>
+                                        </div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="postContainer">
+                            {{>posts}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-3 hide-on-med-and-down">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="userInfo">
+                            <div class="userBox card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <i id="userBoxPic" class="center-align material-icons prefix"
+                                            style="top:0px!important;">
+                                            <img class="center-align" style="width:80%; border-radius:50%;"
+                                                src="{{account.userImg}}">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            // This file just does a GET request to figure out which user is logged in
+            // and updates the HTML on the page
+            $.get("/api/user_data").then(function (data) {
+                $("#userBoxName").text(data.userName);
+                localStorage.setItem("userId", data.id);
+                localStorage.setItem("userImg", data.userImg);
+                console.log("data from backend ", data);
+            });
+        });
+        var titanic = new Titanic({
+            hover: true, // auto animated on hover (default true)
+            click: true  // auto animated on click/tap (default false)
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.tooltipped');
+            var instances = M.Tooltip.init(elems, { margin: 0 });
+            var tooltip = M.Tooltip.getInstance(document.getElementsByClassName('tooltipped'));
+            // tooltip.open();
+        });
+    </script>
